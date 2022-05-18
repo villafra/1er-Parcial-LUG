@@ -37,5 +37,7 @@ namespace Negocio
         {
             return oMPP_Cliente.ListarObjeto(oBE_Cliente);
         }
+
+       
     }
 }

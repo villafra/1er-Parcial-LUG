@@ -15,5 +15,6 @@ namespace Entidades
         public long DNI { get; set; }
         public DateTime FechadeNacimiento { get; set; }
         public BE_Gift_Card CodigoGiftCard { get; set; }
+
     }
 }

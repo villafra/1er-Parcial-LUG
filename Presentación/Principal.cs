@@ -16,5 +16,21 @@ namespace Presentación
         {
             InitializeComponent();
         }
+
+        private void clientesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form frm = Application.OpenForms.Cast<Form>().FirstOrDefault(x => x is frmClientes);
+            if (frm != null)
+            {
+                frm.BringToFront();
+                return;
+            }
+            else
+            {
+                frm = new frmClientes();
+                frm.MdiParent = this;
+                frm.Show();
+            }
+        }
     }
 }

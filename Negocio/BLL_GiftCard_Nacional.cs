@@ -22,9 +22,10 @@ namespace Negocio
             return oMPP_GiftCard.Baja(oGiftCard);
         }
 
-        public override void CalcularDescuento(BE_Gift_Card oBE_GiftCard)
+        public override decimal CalcularDescuento(BE_Gift_Card oBE_GiftCard)
         {
-            throw new NotImplementedException();
+            decimal descuento = 0;
+            decimal = 
         }
 
         public bool Guardar(BE_GiftCard_Nacional oGiftCard)

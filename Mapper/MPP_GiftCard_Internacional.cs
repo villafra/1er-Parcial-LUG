@@ -11,14 +11,27 @@ namespace Mapper
 {
     public class MPP_GiftCard_Internacional : IGestionable<BE_GiftCard_Internacional>
     {
-        public bool Baja(BE_GiftCard_Internacional Objeto)
+        Conexión conexión;
+        public bool Baja(BE_GiftCard_Internacional GiftCard)
         {
-            throw new NotImplementedException();
+            string query = @"delete from [Gift Card] where Codigo= " + GiftCard.Codigo;
+            conexión = new Conexión();
+            return conexión.EscribirTransaction(query);
         }
 
-        public bool Guardar(BE_GiftCard_Internacional Objeto)
+        public bool Guardar(BE_GiftCard_Internacional GiftCard)
         {
-            throw new NotImplementedException();
+            string query;
+
+            if (GiftCard.Codigo != 0)
+            {
+                query = @"Update Cliente set Nombre= '" + GiftCard.Nombre + "', Apellido= '" + Cliente.Apellido + "', DNI= " + Cliente.DNI + ", [Fecha de Nacimiento]= '" + Cliente.FechadeNacimiento.ToString("yyyy-MM-dd") + "' where Legajo = " + Cliente.Codigo;
+            }
+            else
+            {
+                query = @"Insert into Cliente (Nombre, Apellido, DNI, [Fecha de Nacimiento]) values ('" + Cliente.Nombre + "', '" + Cliente.Apellido + "'," + Cliente.DNI + ",'" + Cliente.FechadeNacimiento.ToString("yyyy-MM-dd") + "')";
+            }
+            return conexión.EscribirTransaction(query);
         }
 
         public List<BE_GiftCard_Internacional> Listar()

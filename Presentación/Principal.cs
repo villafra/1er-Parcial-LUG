@@ -32,5 +32,21 @@ namespace Presentación
                 frm.Show();
             }
         }
+
+        private void giftCardsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form frm = Application.OpenForms.Cast<Form>().FirstOrDefault(x => x is frmGiftCards);
+            if (frm != null)
+            {
+                frm.BringToFront();
+                return;
+            }
+            else
+            {
+                frm = new frmGiftCards();
+                frm.MdiParent = this;
+                frm.Show();
+            }
+        }
     }
 }

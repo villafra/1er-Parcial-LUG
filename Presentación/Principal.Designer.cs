@@ -69,6 +69,7 @@
             this.giftCardsToolStripMenuItem.Name = "giftCardsToolStripMenuItem";
             this.giftCardsToolStripMenuItem.Size = new System.Drawing.Size(88, 24);
             this.giftCardsToolStripMenuItem.Text = "Gift Cards";
+            this.giftCardsToolStripMenuItem.Click += new System.EventHandler(this.giftCardsToolStripMenuItem_Click);
             // 
             // salirToolStripMenuItem
             // 

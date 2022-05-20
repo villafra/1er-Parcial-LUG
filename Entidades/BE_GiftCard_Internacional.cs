@@ -10,9 +10,23 @@ namespace Entidades
     {
         public string Pais { get; set; }
 
-        public override void CalcularFechaVencimiento()
+        public override DateTime CalcularFechaVencimiento()
         {
-            throw new NotImplementedException();
+            DateTime Vencimiento;
+
+            if (this.Rubro == "Libre")
+            {
+                Vencimiento = DateTime.Now.AddDays(60);
+            }
+            else if (this.Rubro == "Calzado")
+            {
+                Vencimiento = DateTime.Now.AddDays(150);
+            }
+            else
+            {
+                Vencimiento = DateTime.Now.AddDays(120);
+            }
+            return Vencimiento;
         }
     }
 }

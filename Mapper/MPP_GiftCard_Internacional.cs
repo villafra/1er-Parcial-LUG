@@ -9,12 +9,12 @@ using Data_Acces_Layer;
 
 namespace Mapper
 {
-    public class MPP_GiftCard_Internacional : IGestionable<BE_GiftCard_Internacional>
+    public class MPP_GiftCard_Internacional : MPP_Gift_Card, IGestionable<BE_GiftCard_Internacional>
     {
         Conexión conexión;
         public bool Baja(BE_GiftCard_Internacional GiftCard)
         {
-            string query = @"delete from [Gift Card] where Codigo= " + GiftCard.Codigo;
+            string query = @"Delete from [Gift Card] where Codigo= " + GiftCard.Codigo;
             conexión = new Conexión();
             return conexión.EscribirTransaction(query);
         }
@@ -25,11 +25,11 @@ namespace Mapper
 
             if (GiftCard.Codigo != 0)
             {
-                query = @"Update Cliente set Nombre= '" + GiftCard.Nombre + "', Apellido= '" + Cliente.Apellido + "', DNI= " + Cliente.DNI + ", [Fecha de Nacimiento]= '" + Cliente.FechadeNacimiento.ToString("yyyy-MM-dd") + "' where Legajo = " + Cliente.Codigo;
+                query = @"Update Cliente set Codigo= '" + GiftCard.Codigo + "', [Fecha de Vencimiento]= '" + GiftCard.FechaVencimiento + "', Saldo= " + GiftCard.Saldo + ", Descuento= " + GiftCard.Descuento + ", Estado= '" + GiftCard.Estado + "', Rubro= '" + GiftCard.Rubro + "', Pais= '" + GiftCard.Pais + "' where Codigo = " + GiftCard.Codigo;
             }
             else
             {
-                query = @"Insert into Cliente (Nombre, Apellido, DNI, [Fecha de Nacimiento]) values ('" + Cliente.Nombre + "', '" + Cliente.Apellido + "'," + Cliente.DNI + ",'" + Cliente.FechadeNacimiento.ToString("yyyy-MM-dd") + "')";
+                query = @"Insert into [Gift Card] ([Fecha de Vencimiento], Saldo, Descuento, Estado, Rubro, Pais) values ('" + GiftCard.FechaVencimiento + "'," + GiftCard.Saldo + "," + GiftCard.Descuento + ",'" + GiftCard.Estado +"','" + GiftCard.Rubro + "','" + GiftCard.Pais + "')";
             }
             return conexión.EscribirTransaction(query);
         }

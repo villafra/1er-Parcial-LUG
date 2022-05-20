@@ -9,16 +9,29 @@ using Abstract;
 
 namespace Mapper
 {
-    public class MPP_GiftCard_Nacional : IGestionable<BE_GiftCard_Nacional>
+    public class MPP_GiftCard_Nacional : MPP_Gift_Card, IGestionable<BE_GiftCard_Nacional>
     {
-        public bool Baja(BE_GiftCard_Nacional Objeto)
+        Conexión conexión;
+        public bool Baja(BE_GiftCard_Nacional GiftCard)
         {
-            throw new NotImplementedException();
+            string query = @"Delete from [Gift Card] where Codigo= " + GiftCard.Codigo;
+            conexión = new Conexión();
+            return conexión.EscribirTransaction(query);
         }
 
-        public bool Guardar(BE_GiftCard_Nacional Objeto)
+        public bool Guardar(BE_GiftCard_Nacional GiftCard)
         {
-            throw new NotImplementedException();
+            string query;
+
+            if (GiftCard.Codigo != 0)
+            {
+                query = @"Update Cliente set Codigo= '" + GiftCard.Codigo + "', [Fecha de Otorgamiento]= '" + GiftCard.FechaOtorgamiento + "', [Fecha de Vencimiento]= '" + GiftCard.FechaVencimiento + "', Saldo= " + GiftCard.Saldo + ", Descuento= " + GiftCard.Descuento + ", Estado= '" + GiftCard.Estado + "', Rubro= '" + GiftCard.Rubro + "', Provincia= '" + GiftCard.Provincia + "' where Codigo = " + GiftCard.Codigo;
+            }
+            else
+            {
+                query = @"Insert into [Gift Card] ([Fecha de Otorgamiento], [Fecha de Vencimiento], Saldo, Descuento, Estado, Rubro, Pais) values ('" + GiftCard.FechaOtorgamiento + "', '" + GiftCard.FechaVencimiento + "'," + GiftCard.Saldo + "," + GiftCard.Descuento + ",'" + GiftCard.Estado + "','" + GiftCard.Rubro + "','" + GiftCard.Provincia + "')";
+            }
+            return conexión.EscribirTransaction(query);
         }
 
         public List<BE_GiftCard_Nacional> Listar()

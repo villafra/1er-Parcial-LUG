@@ -66,26 +66,24 @@ namespace Mapper
                                 {
                                     BE_GiftCard_Internacional GiftInt = new BE_GiftCard_Internacional();
                                     GiftInt.Codigo = Convert.ToInt32(row1[0].ToString());
-                                    GiftInt.FechaOtorgamiento = Convert.ToDateTime(row1[1].ToString());
-                                    GiftInt.FechaVencimiento = Convert.ToDateTime(row1[2].ToString());
-                                    GiftInt.Saldo = Convert.ToDecimal(row1[3].ToString());
-                                    GiftInt.Descuento = Convert.ToDecimal(row1[4].ToString());
-                                    GiftInt.Estado = row1[5].ToString();
-                                    GiftInt.Rubro = row1[6].ToString();
-                                    GiftInt.Pais = row1[8].ToString();
+                                    GiftInt.FechaVencimiento = Convert.ToDateTime(row1[1].ToString());
+                                    GiftInt.Saldo = Convert.ToDecimal(row1[2].ToString());
+                                    GiftInt.Descuento = Convert.ToDecimal(row1[3].ToString());
+                                    GiftInt.Estado = row1[4].ToString();
+                                    GiftInt.Rubro = row1[5].ToString();
+                                    GiftInt.Pais = row1[7].ToString();
                                     Cliente.CodigoGiftCard = GiftInt;
                                 }
                                 else
                                 {
                                     BE_GiftCard_Nacional GiftNac = new BE_GiftCard_Nacional();
                                     GiftNac.Codigo = Convert.ToInt32(row1[0].ToString());
-                                    GiftNac.FechaOtorgamiento = Convert.ToDateTime(row1[1].ToString());
-                                    GiftNac.FechaVencimiento = Convert.ToDateTime(row1[2].ToString());
-                                    GiftNac.Saldo = Convert.ToDecimal(row1[3].ToString());
-                                    GiftNac.Descuento = Convert.ToDecimal(row1[4].ToString());
-                                    GiftNac.Estado = row1[5].ToString();
-                                    GiftNac.Rubro = row1[6].ToString();
-                                    GiftNac.Provincia = row1[7].ToString();
+                                    GiftNac.FechaVencimiento = Convert.ToDateTime(row1[1].ToString());
+                                    GiftNac.Saldo = Convert.ToDecimal(row1[2].ToString());
+                                    GiftNac.Descuento = Convert.ToDecimal(row1[3].ToString());
+                                    GiftNac.Estado = row1[4].ToString();
+                                    GiftNac.Rubro = row1[5].ToString();
+                                    GiftNac.Provincia = row1[6].ToString();
                                     Cliente.CodigoGiftCard = GiftNac;
                                 }
                             }

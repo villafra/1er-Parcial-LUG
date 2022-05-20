@@ -23,16 +23,15 @@ namespace Negocio
             return oMPP_GiftCard.Baja(oGiftCard);
         }
 
-        public override void CalcularDescuento(BE_Gift_Card oBE_GiftCard)
-        {
-            throw new NotImplementedException();
-        }
-
         public bool Guardar(BE_GiftCard_Internacional oGiftCard)
         {
             return oMPP_GiftCard.Guardar(oGiftCard);
         }
 
+        public List<BE_Gift_Card> ListarTodo()
+        {
+            return oMPP_GiftCard.ListarTodo();
+        }
         public List<BE_GiftCard_Internacional> Listar()
         {
             return oMPP_GiftCard.Listar();
@@ -41,6 +40,11 @@ namespace Negocio
         public BE_GiftCard_Internacional ListarObjeto(BE_GiftCard_Internacional oGiftCard)
         {
            return oMPP_GiftCard.ListarObjeto(oGiftCard);
+        }
+
+        public override decimal CalcularDescuento(BE_Gift_Card oBE_GiftCard)
+        {
+            return (decimal)0.3;
         }
     }
 }

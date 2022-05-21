@@ -13,16 +13,13 @@ namespace Entidades
         public BE_Cliente CodigoCliente { get; set; }
         public BE_Gift_Card CodigoGiftCard { get; set; }
         public decimal Monto { get; set; }
+        public decimal Descuento { get; set; }
         public decimal Total { get; set; }
-
-        public BE_Compra()
-        {
-            CalcularDescuento();
-        }
 
         public void CalcularDescuento()
         {
-            Total = Monto * CodigoGiftCard.Descuento;
+            Descuento = Monto * CodigoGiftCard.Descuento;
+            Total = Monto - Descuento;
         }
     }
 

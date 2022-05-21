@@ -10,7 +10,7 @@ using System.Data;
 
 namespace Mapper
 {
-    public class MPP_Gift_Card
+    public abstract class MPP_Gift_Card
     {
         Conexión conexión;
         public List<BE_Gift_Card> ListarTodo()
@@ -104,12 +104,6 @@ namespace Mapper
             return ListadeGiftCards;
         }
 
-        public bool CambiarEstado(BE_Gift_Card oBE_Gift_Card, BE_Gift_Card.Status estado)
-        {
-            string query = @"Update [Gift Card] set Estado= '" + estado.ToString() + "' where Codigo = " + oBE_Gift_Card.Codigo;
-            conexión = new Conexión();
-            return conexión.EscribirTransaction(query);
-        }
 
 
     }

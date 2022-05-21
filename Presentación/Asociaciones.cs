@@ -17,6 +17,8 @@ namespace Presentación
         BLL_Cliente oBLL_Ciente;
         BLL_GiftCard_Internacional oBLL_GiftCard_Internacional;
         BLL_GiftCard_Nacional oBLL_GiftCard_Nacional;
+        BLL_Compra oBLL_Compra;
+        BE_Compra oBE_Compra;
         BE_Cliente oBE_Cliente;
         BE_Gift_Card oBE_Gift_Card;
         public frmAsociaciones()
@@ -25,6 +27,7 @@ namespace Presentación
             oBLL_Ciente = new BLL_Cliente();
             oBLL_GiftCard_Internacional = new BLL_GiftCard_Internacional();
             oBLL_GiftCard_Nacional = new BLL_GiftCard_Nacional();
+            oBLL_Compra = new BLL_Compra();
             dgvGiftCards.DataSource = oBLL_GiftCard_Nacional.ListarLibres();
             dgvClientes.DataSource = oBLL_Ciente.Listar();
           }
@@ -34,7 +37,7 @@ namespace Presentación
             try
             {
                 BE_Cliente oBE_Cliente = (BE_Cliente)dgvClientes.CurrentRow.DataBoundItem;
-
+                dgvCompras.DataSource = oBLL_Compra.Listar(oBE_Cliente);
             }
             catch (Exception ex)
             {

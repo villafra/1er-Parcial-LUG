@@ -32,7 +32,7 @@
             this.dgvClientes = new System.Windows.Forms.DataGridView();
             this.btnAsociarGiftCard = new System.Windows.Forms.Button();
             this.btnDesasociarGiftCard = new System.Windows.Forms.Button();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dgvCompras = new System.Windows.Forms.DataGridView();
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -40,7 +40,7 @@
             this.label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvGiftCards)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClientes)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCompras)).BeginInit();
             this.SuspendLayout();
             // 
             // dgvGiftCards
@@ -93,19 +93,19 @@
             this.btnDesasociarGiftCard.UseVisualStyleBackColor = true;
             this.btnDesasociarGiftCard.Click += new System.EventHandler(this.btnDesasociarGiftCard_Click);
             // 
-            // dataGridView1
+            // dgvCompras
             // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(12, 53);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.RowHeadersWidth = 51;
-            this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(320, 318);
-            this.dataGridView1.TabIndex = 8;
+            this.dgvCompras.AllowUserToAddRows = false;
+            this.dgvCompras.AllowUserToDeleteRows = false;
+            this.dgvCompras.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvCompras.Location = new System.Drawing.Point(12, 53);
+            this.dgvCompras.Name = "dgvCompras";
+            this.dgvCompras.ReadOnly = true;
+            this.dgvCompras.RowHeadersWidth = 51;
+            this.dgvCompras.RowTemplate.Height = 24;
+            this.dgvCompras.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvCompras.Size = new System.Drawing.Size(320, 318);
+            this.dgvCompras.TabIndex = 8;
             // 
             // button3
             // 
@@ -162,7 +162,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.dgvCompras);
             this.Controls.Add(this.btnDesasociarGiftCard);
             this.Controls.Add(this.btnAsociarGiftCard);
             this.Controls.Add(this.dgvClientes);
@@ -173,7 +173,7 @@
             this.Text = "Asociaciones";
             ((System.ComponentModel.ISupportInitialize)(this.dgvGiftCards)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClientes)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCompras)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -185,7 +185,7 @@
         private System.Windows.Forms.DataGridView dgvClientes;
         private System.Windows.Forms.Button btnAsociarGiftCard;
         private System.Windows.Forms.Button btnDesasociarGiftCard;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dgvCompras;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Label label1;

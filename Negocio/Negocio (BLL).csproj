@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BLL_Cliente.cs" />
+    <Compile Include="BLL_Compra.cs" />
     <Compile Include="BLL_DescuentoCalculado.cs" />
     <Compile Include="BLL_GiftCard_Internacional.cs" />
     <Compile Include="BLL_GiftCard_Nacional.cs" />

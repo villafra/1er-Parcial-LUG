@@ -12,10 +12,11 @@ namespace Negocio
     public class BLL_Cliente : IGestionable<BE_Cliente>
     {
         MPP_Cliente oMPP_Cliente;
-
+        MPP_Gift_Card oMPP_Gift_Card;
         public BLL_Cliente()
         {
             oMPP_Cliente = new MPP_Cliente();
+            oMPP_Gift_Card = new MPP_Gift_Card();
         }
 
         public bool Baja(BE_Cliente oBE_Cliente)
@@ -38,6 +39,17 @@ namespace Negocio
             return oMPP_Cliente.ListarObjeto(oBE_Cliente);
         }
 
-       
+        public bool AsociarGiftCard(BE_Cliente oBE_Cliente, BE_Gift_Card oBE_Gift_Card)
+        {
+            return oMPP_Cliente.Asociaciones(oBE_Cliente, oBE_Gift_Card, BE_Gift_Card.Status.Activa);
+            
+        }
+
+        public bool DesasociarGiftCard(BE_Cliente oBE_Cliente)
+        {
+            return oMPP_Cliente.Asociaciones(oBE_Cliente, oBE_Cliente.CodigoGiftCard, BE_Gift_Card.Status.Libre);
+        }
+
+
     }
 }

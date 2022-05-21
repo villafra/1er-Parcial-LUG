@@ -32,6 +32,10 @@ namespace Negocio
         {
             return oMPP_GiftCard.ListarTodo();
         }
+        public List<BE_Gift_Card> ListarLibres()
+        {
+            return oMPP_GiftCard.ListarLibres();
+        }
         public List<BE_GiftCard_Internacional> Listar()
         {
             return oMPP_GiftCard.Listar();

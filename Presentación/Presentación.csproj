@@ -47,6 +47,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Asociaciones.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Asociaciones.Designer.cs">
+      <DependentUpon>Asociaciones.cs</DependentUpon>
+    </Compile>
     <Compile Include="Gift Cards.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -67,6 +73,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Asociaciones.resx">
+      <DependentUpon>Asociaciones.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Gift Cards.resx">
       <DependentUpon>Gift Cards.cs</DependentUpon>
     </EmbeddedResource>

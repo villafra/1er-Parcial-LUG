@@ -17,17 +17,22 @@ namespace Entidades
 
             if (this.Rubro == "Libre")
             {
-                Vencimiento = DateTime.Now.AddDays(30);
+                Vencimiento = this.FechadeCreacion.AddDays(30);
             }
             else if (this.Rubro == "Calzado")
             {
-                Vencimiento = DateTime.Now.AddDays(120);
+                Vencimiento = this.FechadeCreacion.AddDays(120);
             }
             else
             {
-                Vencimiento = DateTime.Now.AddDays(90);
+                Vencimiento = this.FechadeCreacion.AddDays(90);
             }
             return Vencimiento;
+        }
+
+        public override string ToString()
+        {
+            return this.Codigo.ToString();
         }
     }
 }

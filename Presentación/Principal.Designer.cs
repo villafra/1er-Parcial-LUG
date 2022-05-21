@@ -30,9 +30,10 @@
         {
             this.StripMenu = new System.Windows.Forms.MenuStrip();
             this.menuPrincipalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.salirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.clientesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.giftCardsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.salirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.asociacionesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.StripMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -52,10 +53,17 @@
             // menuPrincipalToolStripMenuItem
             // 
             this.menuPrincipalToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.asociacionesToolStripMenuItem,
             this.salirToolStripMenuItem});
             this.menuPrincipalToolStripMenuItem.Name = "menuPrincipalToolStripMenuItem";
             this.menuPrincipalToolStripMenuItem.Size = new System.Drawing.Size(121, 24);
             this.menuPrincipalToolStripMenuItem.Text = "Menu Principal";
+            // 
+            // salirToolStripMenuItem
+            // 
+            this.salirToolStripMenuItem.Name = "salirToolStripMenuItem";
+            this.salirToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.salirToolStripMenuItem.Text = "Salir";
             // 
             // clientesToolStripMenuItem
             // 
@@ -71,11 +79,12 @@
             this.giftCardsToolStripMenuItem.Text = "Gift Cards";
             this.giftCardsToolStripMenuItem.Click += new System.EventHandler(this.giftCardsToolStripMenuItem_Click);
             // 
-            // salirToolStripMenuItem
+            // asociacionesToolStripMenuItem
             // 
-            this.salirToolStripMenuItem.Name = "salirToolStripMenuItem";
-            this.salirToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
-            this.salirToolStripMenuItem.Text = "Salir";
+            this.asociacionesToolStripMenuItem.Name = "asociacionesToolStripMenuItem";
+            this.asociacionesToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.asociacionesToolStripMenuItem.Text = "Asociaciones";
+            this.asociacionesToolStripMenuItem.Click += new System.EventHandler(this.asociacionesToolStripMenuItem_Click);
             // 
             // frmPrincipal
             // 
@@ -83,6 +92,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1308, 528);
             this.Controls.Add(this.StripMenu);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.IsMdiContainer = true;
             this.MainMenuStrip = this.StripMenu;
             this.Name = "frmPrincipal";
@@ -102,6 +112,7 @@
         private System.Windows.Forms.ToolStripMenuItem salirToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem clientesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem giftCardsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem asociacionesToolStripMenuItem;
     }
 }
 

@@ -30,23 +30,23 @@
         {
             this.dgvGiftCards = new System.Windows.Forms.DataGridView();
             this.grpGiftCards = new System.Windows.Forms.GroupBox();
+            this.txtEstado = new System.Windows.Forms.TextBox();
+            this.lblProvPais = new System.Windows.Forms.Label();
+            this.comboAlcance = new System.Windows.Forms.ComboBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.ComboRubro = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.numSaldo = new System.Windows.Forms.NumericUpDown();
             this.dtpFechaCreación = new System.Windows.Forms.DateTimePicker();
             this.txtPaisProv = new System.Windows.Forms.TextBox();
-            this.txtLegajo = new System.Windows.Forms.TextBox();
+            this.txtCodigo = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.btnNuevo = new System.Windows.Forms.Button();
             this.btnModificar = new System.Windows.Forms.Button();
             this.btnEliminar = new System.Windows.Forms.Button();
-            this.comboAlcance = new System.Windows.Forms.ComboBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.lblProvPais = new System.Windows.Forms.Label();
-            this.txtEstado = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvGiftCards)).BeginInit();
             this.grpGiftCards.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numSaldo)).BeginInit();
@@ -64,7 +64,7 @@
             this.dgvGiftCards.RowTemplate.Height = 24;
             this.dgvGiftCards.Size = new System.Drawing.Size(888, 466);
             this.dgvGiftCards.TabIndex = 0;
-            this.dgvGiftCards.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvClientes_CellContentClick);
+            this.dgvGiftCards.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvGiftCards_CellContentClick);
             // 
             // grpGiftCards
             // 
@@ -78,7 +78,7 @@
             this.grpGiftCards.Controls.Add(this.numSaldo);
             this.grpGiftCards.Controls.Add(this.dtpFechaCreación);
             this.grpGiftCards.Controls.Add(this.txtPaisProv);
-            this.grpGiftCards.Controls.Add(this.txtLegajo);
+            this.grpGiftCards.Controls.Add(this.txtCodigo);
             this.grpGiftCards.Controls.Add(this.label5);
             this.grpGiftCards.Controls.Add(this.label4);
             this.grpGiftCards.Controls.Add(this.label1);
@@ -88,6 +88,41 @@
             this.grpGiftCards.TabIndex = 1;
             this.grpGiftCards.TabStop = false;
             this.grpGiftCards.Text = "Gift Cards";
+            // 
+            // txtEstado
+            // 
+            this.txtEstado.Enabled = false;
+            this.txtEstado.Location = new System.Drawing.Point(210, 109);
+            this.txtEstado.Name = "txtEstado";
+            this.txtEstado.Size = new System.Drawing.Size(130, 22);
+            this.txtEstado.TabIndex = 19;
+            // 
+            // lblProvPais
+            // 
+            this.lblProvPais.AutoSize = true;
+            this.lblProvPais.Location = new System.Drawing.Point(251, 200);
+            this.lblProvPais.Name = "lblProvPais";
+            this.lblProvPais.Size = new System.Drawing.Size(63, 16);
+            this.lblProvPais.TabIndex = 18;
+            this.lblProvPais.Text = "Provincia";
+            // 
+            // comboAlcance
+            // 
+            this.comboAlcance.FormattingEnabled = true;
+            this.comboAlcance.Location = new System.Drawing.Point(21, 218);
+            this.comboAlcance.Name = "comboAlcance";
+            this.comboAlcance.Size = new System.Drawing.Size(130, 24);
+            this.comboAlcance.TabIndex = 17;
+            this.comboAlcance.SelectedIndexChanged += new System.EventHandler(this.comboAlcance_SelectedIndexChanged);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(62, 200);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(56, 16);
+            this.label7.TabIndex = 16;
+            this.label7.Text = "Alcance";
             // 
             // ComboRubro
             // 
@@ -137,8 +172,9 @@
             // dtpFechaCreación
             // 
             this.dtpFechaCreación.CustomFormat = "dd/MM/yyyy";
+            this.dtpFechaCreación.Enabled = false;
             this.dtpFechaCreación.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpFechaCreación.Location = new System.Drawing.Point(211, 45);
+            this.dtpFechaCreación.Location = new System.Drawing.Point(200, 45);
             this.dtpFechaCreación.Name = "dtpFechaCreación";
             this.dtpFechaCreación.Size = new System.Drawing.Size(129, 22);
             this.dtpFechaCreación.TabIndex = 9;
@@ -150,18 +186,18 @@
             this.txtPaisProv.Size = new System.Drawing.Size(162, 22);
             this.txtPaisProv.TabIndex = 8;
             // 
-            // txtLegajo
+            // txtCodigo
             // 
-            this.txtLegajo.Enabled = false;
-            this.txtLegajo.Location = new System.Drawing.Point(21, 45);
-            this.txtLegajo.Name = "txtLegajo";
-            this.txtLegajo.Size = new System.Drawing.Size(130, 22);
-            this.txtLegajo.TabIndex = 5;
+            this.txtCodigo.Enabled = false;
+            this.txtCodigo.Location = new System.Drawing.Point(21, 45);
+            this.txtCodigo.Name = "txtCodigo";
+            this.txtCodigo.Size = new System.Drawing.Size(130, 22);
+            this.txtCodigo.TabIndex = 5;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(207, 26);
+            this.label5.Location = new System.Drawing.Point(196, 26);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(133, 16);
             this.label5.TabIndex = 4;
@@ -215,40 +251,6 @@
             this.btnEliminar.UseVisualStyleBackColor = true;
             this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
             // 
-            // comboAlcance
-            // 
-            this.comboAlcance.FormattingEnabled = true;
-            this.comboAlcance.Location = new System.Drawing.Point(21, 218);
-            this.comboAlcance.Name = "comboAlcance";
-            this.comboAlcance.Size = new System.Drawing.Size(130, 24);
-            this.comboAlcance.TabIndex = 17;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(62, 200);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(56, 16);
-            this.label7.TabIndex = 16;
-            this.label7.Text = "Alcance";
-            // 
-            // lblProvPais
-            // 
-            this.lblProvPais.AutoSize = true;
-            this.lblProvPais.Location = new System.Drawing.Point(229, 200);
-            this.lblProvPais.Name = "lblProvPais";
-            this.lblProvPais.Size = new System.Drawing.Size(111, 16);
-            this.lblProvPais.TabIndex = 18;
-            this.lblProvPais.Text = "Ingrese Provincia";
-            // 
-            // txtEstado
-            // 
-            this.txtEstado.Enabled = false;
-            this.txtEstado.Location = new System.Drawing.Point(210, 109);
-            this.txtEstado.Name = "txtEstado";
-            this.txtEstado.Size = new System.Drawing.Size(130, 22);
-            this.txtEstado.TabIndex = 19;
-            // 
             // frmGiftCards
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -261,6 +263,7 @@
             this.Controls.Add(this.dgvGiftCards);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "frmGiftCards";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Clientes";
             ((System.ComponentModel.ISupportInitialize)(this.dgvGiftCards)).EndInit();
             this.grpGiftCards.ResumeLayout(false);
@@ -279,7 +282,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DateTimePicker dtpFechaCreación;
         private System.Windows.Forms.TextBox txtPaisProv;
-        private System.Windows.Forms.TextBox txtLegajo;
+        private System.Windows.Forms.TextBox txtCodigo;
         private System.Windows.Forms.Button btnNuevo;
         private System.Windows.Forms.Button btnModificar;
         private System.Windows.Forms.Button btnEliminar;

@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MPP_DescuentoCalculado.cs" />
     <Compile Include="MPP_GiftCard_Nacional.cs" />
     <Compile Include="MPP_Cliente.cs" />
     <Compile Include="MPP_GiftCard_Internacional.cs" />

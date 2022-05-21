@@ -205,6 +205,7 @@
             this.Controls.Add(this.dgvClientes);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "frmClientes";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Clientes";
             ((System.ComponentModel.ISupportInitialize)(this.dgvClientes)).EndInit();
             this.grpClientes.ResumeLayout(false);

@@ -48,5 +48,21 @@ namespace Presentación
                 frm.Show();
             }
         }
+
+        private void asociacionesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form frm = Application.OpenForms.Cast<Form>().FirstOrDefault(x => x is frmAsociaciones);
+            if (frm != null)
+            {
+                frm.BringToFront();
+                return;
+            }
+            else
+            {
+                frm = new frmAsociaciones();
+                frm.MdiParent = this;
+                frm.Show();
+            }
+        }
     }
 }

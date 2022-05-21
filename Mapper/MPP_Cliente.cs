@@ -7,6 +7,7 @@ using Data_Acces_Layer;
 using Abstract;
 using Entidades;
 using System.Data;
+using System.Data.SqlTypes;
 
 namespace Mapper
 {
@@ -30,11 +31,25 @@ namespace Mapper
             }
             else
             {
-                query = @"Insert into Cliente (Nombre, Apellido, DNI, [Fecha de Nacimiento]) values ('" + Cliente.Nombre + "', '" + Cliente.Apellido + "'," + Cliente.DNI + ",'" + Cliente.FechadeNacimiento.ToString("yyyy-MM-dd") + "')"; 
+                query = @"Insert into Cliente (Nombre, Apellido, DNI, [Fecha de Nacimiento]) values ('" + Cliente.Nombre + "', '" + Cliente.Apellido + "'," + Cliente.DNI + ",'" + Cliente.FechadeNacimiento.ToString("yyyy-MM-dd") + "')";
             }
             return conexión.EscribirTransaction(query);
         }
 
+        public bool Asociaciones(BE_Cliente Cliente, BE_Gift_Card oBE_Gift_Card, BE_Gift_Card.Status estado)
+        {
+            string[] query = new string[2];
+            if (estado.ToString() == "Activa")
+            {
+                query[0] = @"Update Cliente set Nombre= '" + Cliente.Nombre + "', Apellido= '" + Cliente.Apellido + "', DNI= " + Cliente.DNI + ", [Fecha de Nacimiento]= '" + Cliente.FechadeNacimiento.ToString("yyyy-MM-dd") + "', Codigo_GiftCard= " + oBE_Gift_Card.Codigo + " where Legajo = " + Cliente.Codigo;
+            }
+            else
+            {
+                query[0] = @"Update Cliente set Nombre= '" + Cliente.Nombre + "', Apellido= '" + Cliente.Apellido + "', DNI= " + Cliente.DNI + ", [Fecha de Nacimiento]= '" + Cliente.FechadeNacimiento.ToString("yyyy-MM-dd") + "', Codigo_GiftCard= " + SqlInt32.Null + " where Legajo = " + Cliente.Codigo;
+            }
+            query[1] = @"Update [Gift Card] set Estado= '" + estado.ToString() + "' where Codigo = " + oBE_Gift_Card.Codigo;
+            return conexión.EscribirTransaction(query);
+        }
         public List<BE_Cliente> Listar()
         {
             conexión = new Conexión();
@@ -58,7 +73,7 @@ namespace Mapper
                         DataSet Ds1;
                         string query1 = @"Select * from [Gift Card] where Codigo= " + Convert.ToInt32(row[5].ToString());
                         Ds1 = conexión.DevolverListado(query1);
-                        if (Ds1.Tables[0].Rows.Count < 0)
+                        if (Ds1.Tables[0].Rows.Count > 0)
                         {
                             foreach(DataRow row1 in Ds1.Tables[0].Rows)
                             {
@@ -66,24 +81,26 @@ namespace Mapper
                                 {
                                     BE_GiftCard_Internacional GiftInt = new BE_GiftCard_Internacional();
                                     GiftInt.Codigo = Convert.ToInt32(row1[0].ToString());
-                                    GiftInt.FechaVencimiento = Convert.ToDateTime(row1[1].ToString());
-                                    GiftInt.Saldo = Convert.ToDecimal(row1[2].ToString());
-                                    GiftInt.Descuento = Convert.ToDecimal(row1[3].ToString());
-                                    GiftInt.Estado = row1[4].ToString();
-                                    GiftInt.Rubro = row1[5].ToString();
-                                    GiftInt.Pais = row1[7].ToString();
+                                    GiftInt.FechadeCreacion = Convert.ToDateTime(row1[1].ToString());
+                                    GiftInt.FechaVencimiento = Convert.ToDateTime(row1[2].ToString());
+                                    GiftInt.Saldo = Convert.ToDecimal(row1[3].ToString());
+                                    GiftInt.Descuento = Convert.ToDecimal(row1[4].ToString());
+                                    GiftInt.Estado = row1[5].ToString();
+                                    GiftInt.Rubro = row1[6].ToString();
+                                    GiftInt.Pais = row1[8].ToString();
                                     Cliente.CodigoGiftCard = GiftInt;
                                 }
                                 else
                                 {
                                     BE_GiftCard_Nacional GiftNac = new BE_GiftCard_Nacional();
                                     GiftNac.Codigo = Convert.ToInt32(row1[0].ToString());
-                                    GiftNac.FechaVencimiento = Convert.ToDateTime(row1[1].ToString());
-                                    GiftNac.Saldo = Convert.ToDecimal(row1[2].ToString());
-                                    GiftNac.Descuento = Convert.ToDecimal(row1[3].ToString());
-                                    GiftNac.Estado = row1[4].ToString();
-                                    GiftNac.Rubro = row1[5].ToString();
-                                    GiftNac.Provincia = row1[6].ToString();
+                                    GiftNac.FechadeCreacion = Convert.ToDateTime(row1[1].ToString());
+                                    GiftNac.FechaVencimiento = Convert.ToDateTime(row1[2].ToString());
+                                    GiftNac.Saldo = Convert.ToDecimal(row1[3].ToString());
+                                    GiftNac.Descuento = Convert.ToDecimal(row1[4].ToString());
+                                    GiftNac.Estado = row1[5].ToString();
+                                    GiftNac.Rubro = row1[6].ToString();
+                                    GiftNac.Provincia = row1[7].ToString();
                                     Cliente.CodigoGiftCard = GiftNac;
                                 }
                             }

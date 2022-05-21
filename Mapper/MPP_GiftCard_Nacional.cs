@@ -22,14 +22,14 @@ namespace Mapper
         public bool Guardar(BE_GiftCard_Nacional GiftCard)
         {
             string query;
-
+            conexión = new Conexión();
             if (GiftCard.Codigo != 0)
             {
-                query = @"Update Cliente set Codigo= '" + GiftCard.Codigo + "', [Fecha de Otorgamiento]= '" + GiftCard.FechaOtorgamiento + "', [Fecha de Vencimiento]= '" + GiftCard.FechaVencimiento + "', Saldo= " + GiftCard.Saldo + ", Descuento= " + GiftCard.Descuento + ", Estado= '" + GiftCard.Estado + "', Rubro= '" + GiftCard.Rubro + "', Provincia= '" + GiftCard.Provincia + "' where Codigo = " + GiftCard.Codigo;
+                query = @"Update [Gift Card] set [Fecha de Vencimiento]= '" + GiftCard.FechaVencimiento.ToString("yyyy-MM-dd") + "', Saldo= " + GiftCard.Saldo + ", Descuento= " + GiftCard.Descuento + ", Estado= '" + GiftCard.Estado + "', Rubro= '" + GiftCard.Rubro + "', Provincia= '" + GiftCard.Provincia + "' where Codigo = " + GiftCard.Codigo;
             }
             else
             {
-                query = @"Insert into [Gift Card] ([Fecha de Otorgamiento], [Fecha de Vencimiento], Saldo, Descuento, Estado, Rubro, Pais) values ('" + GiftCard.FechaOtorgamiento + "', '" + GiftCard.FechaVencimiento + "'," + GiftCard.Saldo + "," + GiftCard.Descuento + ",'" + GiftCard.Estado + "','" + GiftCard.Rubro + "','" + GiftCard.Provincia + "')";
+                query = @"Insert into [Gift Card] ([Fecha de Creacion], [Fecha de Vencimiento], Saldo, Descuento, Estado, Rubro, Pais) values ('" + GiftCard.FechadeCreacion.ToString("yyyy-MM-dd") + "','" + GiftCard.FechaVencimiento.ToString("yyyy-MM-dd") + "'," + GiftCard.Saldo + "," + GiftCard.Descuento + ",'" + GiftCard.Estado + "','" + GiftCard.Rubro + "','" + GiftCard.Provincia + "')";
             }
             return conexión.EscribirTransaction(query);
         }

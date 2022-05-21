@@ -41,6 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BE_Compra.cs" />
+    <Compile Include="BE_DescuentoCalculado.cs" />
     <Compile Include="BE_GiftCard_Nacional.cs" />
     <Compile Include="BE_GiftCard_Internacional.cs" />
     <Compile Include="BE_Gift_Card.cs" />

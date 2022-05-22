@@ -32,9 +32,15 @@ namespace Mapper
                         GiftInt.FechaVencimiento = Convert.ToDateTime(row[2].ToString());
                         GiftInt.Saldo = Convert.ToDecimal(row[3].ToString());
                         GiftInt.Descuento = Convert.ToDecimal(row[4].ToString());
-                        GiftInt.Estado = row[5].ToString();
-                        GiftInt.Rubro = row[6].ToString();
+                        GiftInt.Estado =  (BE_Gift_Card.Status)Enum.Parse(typeof(BE_Gift_Card.Status),row[5].ToString());
+                        GiftInt.Rubro = (BE_Gift_Card.Rubros)Enum.Parse(typeof(BE_Gift_Card.Rubros), row[6].ToString());
                         GiftInt.Pais = row[8].ToString();
+                        if (GiftInt.Vencimiento() && GiftInt.Estado != BE_Gift_Card.Status.Vencida && GiftInt.Estado != BE_Gift_Card.Status.Baja)
+                        {
+                            GiftInt.Estado = BE_Gift_Card.Status.Vencida;
+                            MPP_GiftCard_Internacional oMPP_GiftInt = new MPP_GiftCard_Internacional();
+                            oMPP_GiftInt.Guardar(GiftInt);
+                        }
                         ListadeGiftCards.Add(GiftInt);
                     }
                     else
@@ -45,9 +51,15 @@ namespace Mapper
                         GiftNac.FechaVencimiento = Convert.ToDateTime(row[2].ToString());
                         GiftNac.Saldo = Convert.ToDecimal(row[3].ToString());
                         GiftNac.Descuento = Convert.ToDecimal(row[4].ToString());
-                        GiftNac.Estado = row[5].ToString();
-                        GiftNac.Rubro = row[6].ToString();
+                        GiftNac.Estado = (BE_Gift_Card.Status)Enum.Parse(typeof(BE_Gift_Card.Status), row[5].ToString());
+                        GiftNac.Rubro = (BE_Gift_Card.Rubros)Enum.Parse(typeof(BE_Gift_Card.Rubros), row[6].ToString());
                         GiftNac.Provincia = row[7].ToString();
+                        if (GiftNac.Vencimiento() && GiftNac.Estado != BE_Gift_Card.Status.Vencida && GiftNac.Estado != BE_Gift_Card.Status.Baja)
+                        {
+                            GiftNac.Estado = BE_Gift_Card.Status.Vencida;
+                            MPP_GiftCard_Nacional oMPP_GifNac = new MPP_GiftCard_Nacional();
+                            oMPP_GifNac.Guardar(GiftNac);
+                        }
                         ListadeGiftCards.Add(GiftNac);
                     }
                 }
@@ -77,10 +89,20 @@ namespace Mapper
                         GiftInt.FechaVencimiento = Convert.ToDateTime(row[2].ToString());
                         GiftInt.Saldo = Convert.ToDecimal(row[3].ToString());
                         GiftInt.Descuento = Convert.ToDecimal(row[4].ToString());
-                        GiftInt.Estado = row[5].ToString();
-                        GiftInt.Rubro = row[6].ToString();
+                        GiftInt.Estado = (BE_Gift_Card.Status)Enum.Parse(typeof(BE_Gift_Card.Status), row[5].ToString());
+                        GiftInt.Rubro = (BE_Gift_Card.Rubros)Enum.Parse(typeof(BE_Gift_Card.Rubros), row[6].ToString());
                         GiftInt.Pais = row[8].ToString();
-                        ListadeGiftCards.Add(GiftInt);
+                        if (GiftInt.Vencimiento() && GiftInt.Estado != BE_Gift_Card.Status.Vencida)
+                        {
+                            GiftInt.Estado = BE_Gift_Card.Status.Vencida;
+                            MPP_GiftCard_Internacional oMPP_GiftInt = new MPP_GiftCard_Internacional();
+                            oMPP_GiftInt.Guardar(GiftInt);
+                        }
+                        else
+                        {
+                            ListadeGiftCards.Add(GiftInt);
+                        }
+                        
                     }
                     else
                     {
@@ -90,10 +112,20 @@ namespace Mapper
                         GiftNac.FechaVencimiento = Convert.ToDateTime(row[2].ToString());
                         GiftNac.Saldo = Convert.ToDecimal(row[3].ToString());
                         GiftNac.Descuento = Convert.ToDecimal(row[4].ToString());
-                        GiftNac.Estado = row[5].ToString();
-                        GiftNac.Rubro = row[6].ToString();
+                        GiftNac.Estado = (BE_Gift_Card.Status)Enum.Parse(typeof(BE_Gift_Card.Status), row[5].ToString());
+                        GiftNac.Rubro = (BE_Gift_Card.Rubros)Enum.Parse(typeof(BE_Gift_Card.Rubros), row[6].ToString());
                         GiftNac.Provincia = row[7].ToString();
-                        ListadeGiftCards.Add(GiftNac);
+                        if (GiftNac.Vencimiento() && GiftNac.Estado != BE_Gift_Card.Status.Vencida)
+                        {
+                            GiftNac.Estado = BE_Gift_Card.Status.Vencida;
+                            MPP_GiftCard_Nacional oMPP_GifNac = new MPP_GiftCard_Nacional();
+                            oMPP_GifNac.Guardar(GiftNac);
+                        }
+                        else
+                        {
+                            ListadeGiftCards.Add(GiftNac);
+                        }
+                        
                     }
                 }
             }

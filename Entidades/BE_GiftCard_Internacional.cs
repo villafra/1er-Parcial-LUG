@@ -14,11 +14,11 @@ namespace Entidades
         {
             DateTime Vencimiento;
 
-            if (this.Rubro == "Libre")
+            if (this.Rubro == Rubros.Libre)
             {
                 Vencimiento = this.FechadeCreacion.AddDays(60);
             }
-            else if (this.Rubro == "Calzado")
+            else if (this.Rubro == Rubros.Calzado)
             {
                 Vencimiento = this.FechadeCreacion.AddDays(150);
             }
@@ -32,6 +32,12 @@ namespace Entidades
         public override string ToString()
         {
             return this.Codigo.ToString();
+        }
+
+        public override bool Vencimiento()
+        {
+            if (this.FechaVencimiento > DateTime.Today) { return false; }
+            else { return true; }
         }
     }
 }

@@ -32,7 +32,11 @@ namespace Negocio
         {
             return oMPP_Compra.Listar();
         }
-        public List<BE_Compra> Listar(BE_Cliente Cliente)
+        public bool ValidarSaldo(BE_Gift_Card oBE_GiftCard, BE_Compra oBE_Compra)
+        {
+            return oMPP_Compra.ValidarSaldo(oBE_GiftCard, oBE_Compra);
+        }
+            public List<BE_Compra> Listar(BE_Cliente Cliente)
         {
             return oMPP_Compra.Listar(Cliente);
         }

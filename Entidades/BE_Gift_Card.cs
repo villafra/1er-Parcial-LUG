@@ -14,11 +14,12 @@ namespace Entidades
         public DateTime FechaVencimiento { get; set; }
         public decimal Saldo { get; set; }
         public decimal Descuento { get; set; }
-        public string Estado { get; set; }
-        public string Rubro { get; set; }
+        public Status Estado { get; set; }
+        public Rubros Rubro { get; set; }
 
         public abstract override string ToString();
         public abstract DateTime CalcularFechaVencimiento();
+        public abstract bool Vencimiento();
        public enum Status
         {
             Libre,
@@ -26,6 +27,13 @@ namespace Entidades
             Baja,
             Vencida,
             Sin_Saldo
+        }
+
+        public enum Rubros
+        {
+            Libre,
+            Calzado,
+            Electrodoméstico
         }
     }
 }

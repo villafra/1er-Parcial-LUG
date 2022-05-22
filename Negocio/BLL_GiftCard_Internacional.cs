@@ -45,7 +45,10 @@ namespace Negocio
         {
            return oMPP_GiftCard.ListarObjeto(oGiftCard);
         }
-
+        public bool GiftCardAsociada(BE_GiftCard_Internacional GiftCard)
+        {
+            return oMPP_GiftCard.GiftCardAsociada(GiftCard);
+        }
         public override decimal CalcularDescuento(BE_Gift_Card oBE_GiftCard)
         {
             return (decimal)0.3;
@@ -56,7 +59,7 @@ namespace Negocio
             oBE_GiftCard.Saldo -= oBE_Compra.Total;
             if(oBE_GiftCard.Saldo == 0)
             {
-                oBE_GiftCard.Estado = BE_Gift_Card.Status.Sin_Saldo.ToString();
+                oBE_GiftCard.Estado = BE_Gift_Card.Status.Sin_Saldo;
             }
         }
 
@@ -65,7 +68,7 @@ namespace Negocio
             oBE_GiftCard.Saldo += TotalAnterior - oBE_Compramod.Total;
             if (oBE_GiftCard.Saldo != 0)
             {
-                oBE_GiftCard.Estado = BE_Gift_Card.Status.Activa.ToString();
+                oBE_GiftCard.Estado = BE_Gift_Card.Status.Activa;
             }
         }
 
@@ -74,7 +77,7 @@ namespace Negocio
             oBE_GiftCard.Saldo += oBE_Compra.Total;
             if (oBE_GiftCard.Saldo != 0)
             {
-                oBE_GiftCard.Estado = BE_Gift_Card.Status.Activa.ToString();
+                oBE_GiftCard.Estado = BE_Gift_Card.Status.Activa;
             }
         }
     }

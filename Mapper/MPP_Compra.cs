@@ -18,7 +18,7 @@ namespace Mapper
         {
             string[] query = new string[2];
             query[0] = @"Delete from Compra where Codigo= " + Compra.Codigo;
-            query[1] = @"Update [Gift Card] set Saldo = " + Compra.CodigoGiftCard.Saldo + ", Estado = '" + Compra.CodigoGiftCard.Estado + "' where Codigo= " + Compra.CodigoGiftCard.Codigo;
+            query[1] = @"Update [Gift Card] set Saldo = " + Compra.CodigoGiftCard.Saldo + ", Estado = '" + Compra.CodigoGiftCard.Estado.ToString() + "' where Codigo= " + Compra.CodigoGiftCard.Codigo;
             conexión = new Conexión();
             return conexión.EscribirTransaction(query);
         }
@@ -35,7 +35,7 @@ namespace Mapper
             {
                 query[0] = @"Insert into Compra (Codigo_Cliente, Codigo_GiftCard, Monto, Descuento, Total) values (" + Compra.CodigoCliente.Codigo + "," + Compra.CodigoGiftCard.Codigo + "," + Compra.Monto + "," + Compra.Descuento + "," + Compra.Total + ")"; 
             }
-            query[1] = @"Update [Gift Card] set Saldo = " + Compra.CodigoGiftCard.Saldo + ", Estado = '" + Compra.CodigoGiftCard.Estado + "' where Codigo= " + Compra.CodigoGiftCard.Codigo;
+            query[1] = @"Update [Gift Card] set Saldo = " + Compra.CodigoGiftCard.Saldo + ", Estado = '" + Compra.CodigoGiftCard.Estado.ToString() + "' where Codigo= " + Compra.CodigoGiftCard.Codigo;
             return conexión.EscribirTransaction(query);
         }
 
@@ -43,7 +43,7 @@ namespace Mapper
         {
             conexión = new Conexión();
             DataSet Ds;
-            string query = @"Select * from Compra where Codigo_Cliente= " + oBE_Cliente.Codigo;
+            string query = @"Select * from Compra where Codigo_Cliente= " + oBE_Cliente.Codigo + " and Codigo_GiftCard= " + oBE_Cliente.CodigoGiftCard.Codigo;
             Ds = conexión.DevolverListado(query);
             List<BE_Compra> ListadeCompras = new List<BE_Compra>();
             if (Ds.Tables[0].Rows.Count > 0)
@@ -86,8 +86,8 @@ namespace Mapper
                                             GiftInt.FechaVencimiento = Convert.ToDateTime(row1[2].ToString());
                                             GiftInt.Saldo = Convert.ToDecimal(row1[3].ToString());
                                             GiftInt.Descuento = Convert.ToDecimal(row1[4].ToString());
-                                            GiftInt.Estado = row1[5].ToString();
-                                            GiftInt.Rubro = row1[6].ToString();
+                                            GiftInt.Estado = (BE_Gift_Card.Status)Enum.Parse(typeof(BE_Gift_Card.Status), row1[5].ToString());
+                                            GiftInt.Rubro = (BE_Gift_Card.Rubros)Enum.Parse(typeof(BE_Gift_Card.Rubros), row1[6].ToString());
                                             GiftInt.Pais = row1[8].ToString();
                                             Cliente.CodigoGiftCard = GiftInt;
                                         }
@@ -99,8 +99,8 @@ namespace Mapper
                                             GiftNac.FechaVencimiento = Convert.ToDateTime(row1[2].ToString());
                                             GiftNac.Saldo = Convert.ToDecimal(row1[3].ToString());
                                             GiftNac.Descuento = Convert.ToDecimal(row1[4].ToString());
-                                            GiftNac.Estado = row1[5].ToString();
-                                            GiftNac.Rubro = row1[6].ToString();
+                                            GiftNac.Estado = (BE_Gift_Card.Status)Enum.Parse(typeof(BE_Gift_Card.Status), row1[5].ToString());
+                                            GiftNac.Rubro = (BE_Gift_Card.Rubros)Enum.Parse(typeof(BE_Gift_Card.Rubros), row1[6].ToString());
                                             GiftNac.Provincia = row1[7].ToString();
                                             Cliente.CodigoGiftCard = GiftNac;
                                         }
@@ -124,6 +124,12 @@ namespace Mapper
             return ListadeCompras;
         }
 
+        public bool ValidarSaldo(BE_Gift_Card oBE_GiftCard, BE_Compra oBE_Compra)
+        {
+            string query = @"select Saldo from [Gift Card] where Codigo= " + oBE_GiftCard.Codigo + " and Saldo>= " + oBE_Compra.Total;
+            conexión = new Conexión();
+            return conexión.LeerScalar(query);
+        }
         public List<BE_Compra> Listar()
         {
             throw new NotImplementedException();

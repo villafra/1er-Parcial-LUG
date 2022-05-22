@@ -45,6 +45,9 @@
             this.lblSaldo = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.lblEstado = new System.Windows.Forms.Label();
+            this.lblFechaVencimiento = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.btnBajaGiftCard = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvGiftCards)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClientes)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCompras)).BeginInit();
@@ -82,7 +85,7 @@
             // 
             // btnAsociarGiftCard
             // 
-            this.btnAsociarGiftCard.Location = new System.Drawing.Point(979, 390);
+            this.btnAsociarGiftCard.Location = new System.Drawing.Point(815, 390);
             this.btnAsociarGiftCard.Name = "btnAsociarGiftCard";
             this.btnAsociarGiftCard.Size = new System.Drawing.Size(144, 23);
             this.btnAsociarGiftCard.TabIndex = 6;
@@ -92,7 +95,7 @@
             // 
             // btnDesasociarGiftCard
             // 
-            this.btnDesasociarGiftCard.Location = new System.Drawing.Point(979, 438);
+            this.btnDesasociarGiftCard.Location = new System.Drawing.Point(815, 454);
             this.btnDesasociarGiftCard.Name = "btnDesasociarGiftCard";
             this.btnDesasociarGiftCard.Size = new System.Drawing.Size(144, 23);
             this.btnDesasociarGiftCard.TabIndex = 7;
@@ -191,7 +194,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Nirmala UI", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(431, 409);
+            this.label5.Location = new System.Drawing.Point(435, 390);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(145, 25);
             this.label5.TabIndex = 17;
@@ -201,7 +204,7 @@
             // 
             this.lblSaldo.AutoSize = true;
             this.lblSaldo.Font = new System.Drawing.Font("Nirmala UI", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSaldo.Location = new System.Drawing.Point(602, 409);
+            this.lblSaldo.Location = new System.Drawing.Point(606, 390);
             this.lblSaldo.Name = "lblSaldo";
             this.lblSaldo.Size = new System.Drawing.Size(32, 25);
             this.lblSaldo.TabIndex = 18;
@@ -211,7 +214,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Nirmala UI", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(431, 450);
+            this.label6.Location = new System.Drawing.Point(435, 423);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(155, 25);
             this.label6.TabIndex = 19;
@@ -221,16 +224,48 @@
             // 
             this.lblEstado.AutoSize = true;
             this.lblEstado.Font = new System.Drawing.Font("Nirmala UI", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblEstado.Location = new System.Drawing.Point(615, 450);
+            this.lblEstado.Location = new System.Drawing.Point(619, 423);
             this.lblEstado.Name = "lblEstado";
             this.lblEstado.Size = new System.Drawing.Size(0, 25);
             this.lblEstado.TabIndex = 20;
+            // 
+            // lblFechaVencimiento
+            // 
+            this.lblFechaVencimiento.AutoSize = true;
+            this.lblFechaVencimiento.Font = new System.Drawing.Font("Nirmala UI", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblFechaVencimiento.Location = new System.Drawing.Point(606, 456);
+            this.lblFechaVencimiento.Name = "lblFechaVencimiento";
+            this.lblFechaVencimiento.Size = new System.Drawing.Size(0, 25);
+            this.lblFechaVencimiento.TabIndex = 22;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Nirmala UI", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Location = new System.Drawing.Point(382, 454);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(198, 25);
+            this.label8.TabIndex = 21;
+            this.label8.Text = "Fecha de Vencimiento";
+            // 
+            // btnBajaGiftCard
+            // 
+            this.btnBajaGiftCard.Location = new System.Drawing.Point(22, 454);
+            this.btnBajaGiftCard.Name = "btnBajaGiftCard";
+            this.btnBajaGiftCard.Size = new System.Drawing.Size(144, 23);
+            this.btnBajaGiftCard.TabIndex = 23;
+            this.btnBajaGiftCard.Text = "Baja Gift Card";
+            this.btnBajaGiftCard.UseVisualStyleBackColor = true;
+            this.btnBajaGiftCard.Click += new System.EventHandler(this.btnBajaGiftCard_Click);
             // 
             // frmAsociaciones
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1298, 490);
+            this.Controls.Add(this.btnBajaGiftCard);
+            this.Controls.Add(this.lblFechaVencimiento);
+            this.Controls.Add(this.label8);
             this.Controls.Add(this.lblEstado);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.lblSaldo);
@@ -279,5 +314,8 @@
         private System.Windows.Forms.Label lblSaldo;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label lblEstado;
+        private System.Windows.Forms.Label lblFechaVencimiento;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Button btnBajaGiftCard;
     }
 }

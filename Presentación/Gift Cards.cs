@@ -34,7 +34,7 @@ namespace Presentación
             dgvGiftCards.DataSource = null;
             dgvGiftCards.DataSource = oBLL_GiftCard_Nacional.ListarTodo();
             ComboRubro.DataSource = null;
-            ComboRubro.DataSource = Enum.GetNames(typeof(Rubro));
+            ComboRubro.DataSource = Enum.GetNames(typeof(BE_Gift_Card.Rubros));
             comboAlcance.DataSource = Enum.GetNames(typeof(Tipo));
         }
         private void btnNuevo_Click(object sender, EventArgs e)
@@ -63,12 +63,28 @@ namespace Presentación
             if (lblProvPais.Text == "Nacional")
             {
                 ViejoNac();
-                oBLL_GiftCard_Nacional.Baja(oBE_GiftCard_Nacional);
+                if (oBLL_GiftCard_Nacional.GiftCardAsociada(oBE_GiftCard_Nacional))
+                {
+                    MessageBox.Show("Ya esta asociada");
+                }
+                else
+                {
+                    oBLL_GiftCard_Nacional.Baja(oBE_GiftCard_Nacional);
+                }
+                
             }
             else
             {
                 ViejoInt();
-                oBLL_GiftCard_Internacional.Baja(oBE_GiftCard_Internacional);
+                if (oBLL_GiftCard_Internacional.GiftCardAsociada(oBE_GiftCard_Internacional))
+                {
+                    MessageBox.Show("Ya esta asociada");
+                }
+                else
+                {
+                    oBLL_GiftCard_Internacional.Baja(oBE_GiftCard_Internacional);
+                }
+                
             }
             ActualizarListado();
         }
@@ -84,8 +100,8 @@ namespace Presentación
                     oBE_GiftCard_Nacional.FechaVencimiento = oBE_GiftCard_Nacional.CalcularFechaVencimiento();
                     oBE_GiftCard_Nacional.Saldo = numSaldo.Value;
                     oBE_GiftCard_Nacional.Descuento = oBLL_GiftCard_Nacional.CalcularDescuento(oBE_GiftCard_Nacional);
-                    oBE_GiftCard_Nacional.Estado = "Libre";
-                    oBE_GiftCard_Nacional.Rubro = ComboRubro.Text;
+                    oBE_GiftCard_Nacional.Estado = BE_Gift_Card.Status.Libre;
+                    oBE_GiftCard_Nacional.Rubro = (BE_Gift_Card.Rubros)Enum.Parse(typeof(BE_Gift_Card.Rubros), ComboRubro.Text);
                     oBE_GiftCard_Nacional.Provincia = txtPaisProv.Text;
                     oBLL_GiftCard_Nacional.Guardar(oBE_GiftCard_Nacional);
                 }
@@ -96,8 +112,8 @@ namespace Presentación
                     oBE_GiftCard_Internacional.FechaVencimiento = oBE_GiftCard_Internacional.CalcularFechaVencimiento();
                     oBE_GiftCard_Internacional.Saldo = numSaldo.Value;
                     oBE_GiftCard_Internacional.Descuento = oBLL_GiftCard_Internacional.CalcularDescuento(oBE_GiftCard_Internacional);
-                    oBE_GiftCard_Internacional.Estado = "Libre";
-                    oBE_GiftCard_Internacional.Rubro = ComboRubro.Text;
+                    oBE_GiftCard_Internacional.Estado = BE_Gift_Card.Status.Libre;
+                    oBE_GiftCard_Internacional.Rubro = (BE_Gift_Card.Rubros)Enum.Parse(typeof(BE_Gift_Card.Rubros), ComboRubro.Text);
                     oBE_GiftCard_Internacional.Pais = txtPaisProv.Text;
                     oBLL_GiftCard_Internacional.Guardar(oBE_GiftCard_Internacional);
                 }
@@ -117,8 +133,8 @@ namespace Presentación
                 oBE_GiftCard_Nacional.Codigo = Convert.ToInt32(txtCodigo.Text);
                 oBE_GiftCard_Nacional.FechaVencimiento = dtpFechaCreación.Value;
                 oBE_GiftCard_Nacional.Saldo = numSaldo.Value;
-                oBE_GiftCard_Nacional.Estado = txtEstado.Text;
-                oBE_GiftCard_Nacional.Rubro = ComboRubro.Text;
+                oBE_GiftCard_Nacional.Estado = (BE_Gift_Card.Status)Enum.Parse(typeof(BE_Gift_Card.Status), txtEstado.Text);
+                oBE_GiftCard_Nacional.Rubro = (BE_Gift_Card.Rubros)Enum.Parse(typeof(BE_Gift_Card.Rubros), ComboRubro.Text);
                 oBE_GiftCard_Nacional.Provincia = txtPaisProv.Text;
             }
             catch (Exception ex)
@@ -134,8 +150,8 @@ namespace Presentación
                 oBE_GiftCard_Internacional.Codigo = Convert.ToInt32(txtCodigo.Text);
                 oBE_GiftCard_Internacional.FechaVencimiento = dtpFechaCreación.Value;
                 oBE_GiftCard_Internacional.Saldo = numSaldo.Value;
-                oBE_GiftCard_Internacional.Estado = txtEstado.Text;
-                oBE_GiftCard_Internacional.Rubro = ComboRubro.Text;
+                oBE_GiftCard_Internacional.Estado = (BE_Gift_Card.Status)Enum.Parse(typeof(BE_Gift_Card.Status), txtEstado.Text);
+                oBE_GiftCard_Internacional.Rubro = (BE_Gift_Card.Rubros)Enum.Parse(typeof(BE_Gift_Card.Rubros), ComboRubro.Text);
                 oBE_GiftCard_Internacional.Pais = txtPaisProv.Text;
             }
             catch (Exception ex)
@@ -155,8 +171,8 @@ namespace Presentación
                     txtCodigo.Text = (gift_Card as BE_GiftCard_Nacional).Codigo.ToString();
                     dtpFechaCreación.Value = (gift_Card as BE_GiftCard_Nacional).FechaVencimiento;
                     numSaldo.Value = (gift_Card as BE_GiftCard_Nacional).Saldo;
-                    txtEstado.Text = (gift_Card as BE_GiftCard_Nacional).Estado;
-                    ComboRubro.Text = (gift_Card as BE_GiftCard_Nacional).Rubro;
+                    txtEstado.Text = (gift_Card as BE_GiftCard_Nacional).Estado.ToString();
+                    ComboRubro.Text = (gift_Card as BE_GiftCard_Nacional).Rubro.ToString();
                     comboAlcance.Text = "Nacional";
                     txtPaisProv.Text = (gift_Card as BE_GiftCard_Nacional).Provincia;
                 }
@@ -165,8 +181,8 @@ namespace Presentación
                     txtCodigo.Text = (gift_Card as BE_GiftCard_Internacional).Codigo.ToString();
                     dtpFechaCreación.Value = (gift_Card as BE_GiftCard_Internacional).FechaVencimiento;
                     numSaldo.Value = (gift_Card as BE_GiftCard_Internacional).Saldo;
-                    txtEstado.Text = (gift_Card as BE_GiftCard_Internacional).Estado;
-                    ComboRubro.Text = (gift_Card as BE_GiftCard_Internacional).Rubro;
+                    txtEstado.Text = (gift_Card as BE_GiftCard_Internacional).Estado.ToString();
+                    ComboRubro.Text = (gift_Card as BE_GiftCard_Internacional).Rubro.ToString();
                     comboAlcance.Text = "Internacional";
                     txtPaisProv.Text = (gift_Card as BE_GiftCard_Internacional).Pais;
                 }
@@ -177,29 +193,6 @@ namespace Presentación
             {
                 throw ex;
             }
-        }
-             public enum Estado 
-        {
-            [Display(Name = "Libre")]
-            Libre = 1,
-            [Display(Name = "Activa")]
-            Activa = 2,
-            [Display(Name = "Baja")]
-            Baja = 3,
-            [Display(Name = "Vencida")]
-            Vencida = 4,
-            [Display(Name = "Sin Saldo")]
-            Sin_Saldo = 5
-        }
-
-        public enum Rubro
-        {
-            [Display(Name = "Libre")]
-            Libre = 1,
-            [Display(Name = "Calzado")]
-            Calzado = 2,
-            [Display(Name = "Electrodoméstivos")]
-            Electrodomésticos = 3
         }
         public enum Tipo
         {

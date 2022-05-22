@@ -47,7 +47,14 @@ namespace Negocio
         {
             return oMPP_Cliente.Asociaciones(oBE_Cliente, oBE_Cliente.CodigoGiftCard, BE_Gift_Card.Status.Libre);
         }
-
+        public bool BajaGiftCard(BE_Cliente oBE_Cliente)
+        {
+            return oMPP_Cliente.Asociaciones(oBE_Cliente, oBE_Cliente.CodigoGiftCard, BE_Gift_Card.Status.Baja);
+        }
+        public bool GiftCardAsociada(BE_Cliente oBE_Cliente)
+        {
+            return oMPP_Cliente.GiftCardAsociada(oBE_Cliente);
+        }
 
     }
 }

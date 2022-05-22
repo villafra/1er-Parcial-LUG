@@ -37,16 +37,19 @@ namespace Presentación
             try
             {
                 BE_Cliente oBE_Cliente = (BE_Cliente)dgvClientes.CurrentRow.DataBoundItem;
-                dgvCompras.DataSource = oBLL_Compra.Listar(oBE_Cliente);
                 if (oBE_Cliente.CodigoGiftCard != null)
                 {
+                    dgvCompras.DataSource = oBLL_Compra.Listar(oBE_Cliente);
                     lblSaldo.Text = "$ " + oBE_Cliente.CodigoGiftCard.Saldo.ToString();
-                    lblEstado.Text = oBE_Cliente.CodigoGiftCard.Estado;
+                    lblEstado.Text = oBE_Cliente.CodigoGiftCard.Estado.ToString();
+                    lblFechaVencimiento.Text = oBE_Cliente.CodigoGiftCard.FechaVencimiento.ToString("dd/MM/yyy");
                 }
                 else
                 {
                     lblSaldo.Text = "";
                     lblEstado.Text = "";
+                    lblFechaVencimiento.Text = "";
+                    dgvCompras.DataSource = null;
                 }
 
             }
@@ -82,9 +85,17 @@ namespace Presentación
         {
             oBE_Cliente = (BE_Cliente)dgvClientes.CurrentRow.DataBoundItem;
             oBE_Gift_Card = (BE_Gift_Card)dgvGiftCards.CurrentRow.DataBoundItem;
+            if (!oBLL_Ciente.GiftCardAsociada(oBE_Cliente))
+            {
             oBLL_Ciente.AsociarGiftCard(oBE_Cliente, oBE_Gift_Card);
             dgvGiftCards.DataSource = oBLL_GiftCard_Nacional.ListarLibres();
             dgvClientes.DataSource = oBLL_Ciente.Listar();
+            }
+            else
+            {
+                MessageBox.Show("Ya tiene una asociada");
+            }
+
         }
 
         private void btnDesasociarGiftCard_Click(object sender, EventArgs e)
@@ -98,23 +109,47 @@ namespace Presentación
         private void btnCargarCompraCliente_Click(object sender, EventArgs e)
         {
             oBE_Cliente = (BE_Cliente)dgvClientes.CurrentRow.DataBoundItem;
-            BE_Compra oBE_Compra = new BE_Compra();
-            oBE_Compra.CodigoCliente = oBE_Cliente;
-            oBE_Compra.CodigoGiftCard = oBE_Cliente.CodigoGiftCard;
-            oBE_Compra.Descuento = oBE_Cliente.CodigoGiftCard.Descuento;
-            oBE_Compra.Monto = Convert.ToDecimal(txtMonto.Text);
-            oBE_Compra.CalcularDescuento();
-            if (oBE_Compra.CodigoGiftCard is BE_GiftCard_Internacional)
+            if (oBE_Cliente.CodigoGiftCard != null)
             {
-                oBLL_GiftCard_Internacional.CalcularMontodeCompra(oBE_Compra.CodigoGiftCard,oBE_Compra);
-                oBLL_Compra.Guardar(oBE_Compra);
+                if(oBE_Cliente.CodigoGiftCard.Estado != BE_Gift_Card.Status.Vencida)
+                {
+                    BE_Compra oBE_Compra = new BE_Compra();
+                    oBE_Compra.CodigoCliente = oBE_Cliente;
+                    oBE_Compra.CodigoGiftCard = oBE_Cliente.CodigoGiftCard;
+                    oBE_Compra.Descuento = oBE_Cliente.CodigoGiftCard.Descuento;
+                    oBE_Compra.Monto = Convert.ToDecimal(txtMonto.Text);
+                    oBE_Compra.CalcularDescuento();
+                    if (oBLL_Compra.ValidarSaldo(oBE_Cliente.CodigoGiftCard, oBE_Compra))
+                    {
+                        if (oBE_Compra.CodigoGiftCard is BE_GiftCard_Internacional)
+                        {
+                            oBLL_GiftCard_Internacional.CalcularMontodeCompra(oBE_Compra.CodigoGiftCard, oBE_Compra);
+                            oBLL_Compra.Guardar(oBE_Compra);
+                        }
+                        else
+                        {
+                            oBLL_GiftCard_Nacional.CalcularMontodeCompra(oBE_Compra.CodigoGiftCard, oBE_Compra);
+                            oBLL_Compra.Guardar(oBE_Compra);
+                        }
+                        dgvCompras.DataSource = oBLL_Compra.Listar(oBE_Cliente);
+                    }
+                    else
+                    {
+                        MessageBox.Show("saldo insuficiente");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Vencida");
+                }
+                
+               
             }
             else
             {
-                oBLL_GiftCard_Nacional.CalcularMontodeCompra(oBE_Compra.CodigoGiftCard, oBE_Compra);
-                oBLL_Compra.Guardar(oBE_Compra);
+                MessageBox.Show("Sin Gift Card");
             }
-            dgvCompras.DataSource = oBLL_Compra.Listar(oBE_Cliente);
+            
         }
 
         private void btnEditCompra_Click(object sender, EventArgs e)
@@ -150,6 +185,14 @@ namespace Presentación
                 oBLL_Compra.Baja(oBE_Compra);
             }
             dgvCompras.DataSource = oBLL_Compra.Listar(oBE_Cliente);
+        }
+
+        private void btnBajaGiftCard_Click(object sender, EventArgs e)
+        {
+            oBE_Cliente = (BE_Cliente)dgvClientes.CurrentRow.DataBoundItem;
+            oBLL_Ciente.BajaGiftCard(oBE_Cliente);
+            dgvClientes.DataSource = oBLL_Ciente.Listar();
+            dgvGiftCards.DataSource = oBLL_GiftCard_Nacional.ListarLibres();
         }
     }
 }

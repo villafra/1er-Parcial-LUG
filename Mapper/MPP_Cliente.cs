@@ -85,9 +85,15 @@ namespace Mapper
                                     GiftInt.FechaVencimiento = Convert.ToDateTime(row1[2].ToString());
                                     GiftInt.Saldo = Convert.ToDecimal(row1[3].ToString());
                                     GiftInt.Descuento = Convert.ToDecimal(row1[4].ToString());
-                                    GiftInt.Estado = row1[5].ToString();
-                                    GiftInt.Rubro = row1[6].ToString();
+                                    GiftInt.Estado = (BE_Gift_Card.Status)Enum.Parse(typeof(BE_Gift_Card.Status), row1[5].ToString());
+                                    GiftInt.Rubro = (BE_Gift_Card.Rubros)Enum.Parse(typeof(BE_Gift_Card.Rubros), row1[6].ToString());
                                     GiftInt.Pais = row1[8].ToString();
+                                    if (GiftInt.Vencimiento() && GiftInt.Estado != BE_Gift_Card.Status.Vencida)
+                                    {
+                                        GiftInt.Estado = BE_Gift_Card.Status.Vencida;
+                                        MPP_GiftCard_Internacional oMPP_GiftInt = new MPP_GiftCard_Internacional();
+                                        oMPP_GiftInt.Guardar(GiftInt);
+                                    }
                                     Cliente.CodigoGiftCard = GiftInt;
                                 }
                                 else
@@ -98,9 +104,15 @@ namespace Mapper
                                     GiftNac.FechaVencimiento = Convert.ToDateTime(row1[2].ToString());
                                     GiftNac.Saldo = Convert.ToDecimal(row1[3].ToString());
                                     GiftNac.Descuento = Convert.ToDecimal(row1[4].ToString());
-                                    GiftNac.Estado = row1[5].ToString();
-                                    GiftNac.Rubro = row1[6].ToString();
+                                    GiftNac.Estado = (BE_Gift_Card.Status)Enum.Parse(typeof(BE_Gift_Card.Status), row1[5].ToString());
+                                    GiftNac.Rubro = (BE_Gift_Card.Rubros)Enum.Parse(typeof(BE_Gift_Card.Rubros), row1[6].ToString());
                                     GiftNac.Provincia = row1[7].ToString();
+                                    if (GiftNac.Vencimiento() && GiftNac.Estado != BE_Gift_Card.Status.Vencida)
+                                    {
+                                        GiftNac.Estado = BE_Gift_Card.Status.Vencida;
+                                        MPP_GiftCard_Nacional oMPP_GifNac = new MPP_GiftCard_Nacional();
+                                        oMPP_GifNac.Guardar(GiftNac);
+                                    }
                                     Cliente.CodigoGiftCard = GiftNac;
                                 }
                             }
@@ -116,6 +128,12 @@ namespace Mapper
             return ListadeClientes;
         }
 
+        public bool GiftCardAsociada(BE_Cliente oBE_Cliente)
+        {
+            string query = @"Select count(Codigo_GiftCard) from Cliente where Legajo= " + oBE_Cliente.Codigo;
+            conexión = new Conexión();
+            return conexión.LeerScalar(query);
+        }
         public BE_Cliente ListarObjeto(BE_Cliente Cliente)
         {
             throw new NotImplementedException();

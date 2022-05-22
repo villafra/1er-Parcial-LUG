@@ -25,11 +25,11 @@ namespace Mapper
             conexión = new Conexión();
             if (GiftCard.Codigo != 0)
             {
-                query = @"Update [Gift Card] set [Fecha de Vencimiento]= '" + GiftCard.FechaVencimiento.ToString("yyyy-MM-dd") + "', Saldo= " + GiftCard.Saldo + ", Descuento= " + GiftCard.Descuento + ", Estado= '" + GiftCard.Estado + "', Rubro= '" + GiftCard.Rubro + "', Provincia= '" + GiftCard.Provincia + "' where Codigo = " + GiftCard.Codigo;
+                query = @"Update [Gift Card] set [Fecha de Vencimiento]= '" + GiftCard.FechaVencimiento.ToString("yyyy-MM-dd") + "', Saldo= " + GiftCard.Saldo + ", Descuento= " + GiftCard.Descuento + ", Estado= '" + GiftCard.Estado.ToString() + "', Rubro= '" + GiftCard.Rubro.ToString() + "', Provincia= '" + GiftCard.Provincia + "' where Codigo = " + GiftCard.Codigo;
             }
             else
             {
-                query = @"Insert into [Gift Card] ([Fecha de Creacion], [Fecha de Vencimiento], Saldo, Descuento, Estado, Rubro, Pais) values ('" + GiftCard.FechadeCreacion.ToString("yyyy-MM-dd") + "','" + GiftCard.FechaVencimiento.ToString("yyyy-MM-dd") + "'," + GiftCard.Saldo + "," + GiftCard.Descuento + ",'" + GiftCard.Estado + "','" + GiftCard.Rubro + "','" + GiftCard.Provincia + "')";
+                query = @"Insert into [Gift Card] ([Fecha de Creacion], [Fecha de Vencimiento], Saldo, Descuento, Estado, Rubro, Provincia) values ('" + GiftCard.FechadeCreacion.ToString("yyyy-MM-dd") + "','" + GiftCard.FechaVencimiento.ToString("yyyy-MM-dd") + "'," + GiftCard.Saldo + "," + GiftCard.Descuento + ",'" + GiftCard.Estado.ToString() + "','" + GiftCard.Rubro.ToString() + "','" + GiftCard.Provincia + "')";
             }
             return conexión.EscribirTransaction(query);
         }
@@ -42,6 +42,12 @@ namespace Mapper
         public BE_GiftCard_Nacional ListarObjeto(BE_GiftCard_Nacional Objeto)
         {
             throw new NotImplementedException();
+        }
+        public bool GiftCardAsociada(BE_GiftCard_Nacional GiftCard)
+        {
+            string query = @"select count(Codigo_GiftCard) from Cliente where Codigo_GiftCard= " + GiftCard.Codigo;
+            conexión = new Conexión();
+            return conexión.LeerScalar(query);
         }
     }
 }

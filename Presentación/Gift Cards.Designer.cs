@@ -199,9 +199,9 @@
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(196, 26);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(133, 16);
+            this.label5.Size = new System.Drawing.Size(141, 16);
             this.label5.TabIndex = 4;
-            this.label5.Text = "Fecha de Otorgación";
+            this.label5.Text = "Fecha de Vencimiento";
             // 
             // label4
             // 

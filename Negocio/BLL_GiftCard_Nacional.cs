@@ -50,5 +50,30 @@ namespace Negocio
         {
             return (decimal)0.25;
         }
+
+        public override void CalcularMontodeCompra(BE_Gift_Card oBE_GiftCard, BE_Compra oBE_Compra)
+        {
+            oBE_GiftCard.Saldo -= oBE_Compra.Total;
+            if (oBE_GiftCard.Saldo == 0)
+            {
+                oBE_GiftCard.Estado = BE_Gift_Card.Status.Sin_Saldo.ToString();
+            }
+        }
+        public override void ModificarMontodeCompra(BE_Gift_Card oBE_GiftCard, BE_Compra oBE_Compramod, decimal TotalAnterior)
+        {
+            oBE_GiftCard.Saldo += TotalAnterior - oBE_Compramod.Total;
+            if (oBE_GiftCard.Saldo != 0)
+            {
+                oBE_GiftCard.Estado = BE_Gift_Card.Status.Activa.ToString();
+            }
+        }
+        public override void EliminarMontodeCompra(BE_Gift_Card oBE_GiftCard, BE_Compra oBE_Compra)
+        {
+            oBE_GiftCard.Saldo += oBE_Compra.Total;
+            if (oBE_GiftCard.Saldo != 0)
+            {
+                oBE_GiftCard.Estado = BE_Gift_Card.Status.Activa.ToString();
+            }
+        }
     }
 }

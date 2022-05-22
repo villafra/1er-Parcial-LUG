@@ -16,23 +16,26 @@ namespace Mapper
 
         public bool Baja(BE_Compra Compra)
         {
-            string query = @"Delete from Compra where Codigo= " + Compra.Codigo;
+            string[] query = new string[2];
+            query[0] = @"Delete from Compra where Codigo= " + Compra.Codigo;
+            query[1] = @"Update [Gift Card] set Saldo = " + Compra.CodigoGiftCard.Saldo + ", Estado = '" + Compra.CodigoGiftCard.Estado + "' where Codigo= " + Compra.CodigoGiftCard.Codigo;
             conexión = new Conexión();
             return conexión.EscribirTransaction(query);
         }
 
         public bool Guardar(BE_Compra Compra)
         {
-            string query;
+            string[] query = new string[2];
 
             if (Compra.Codigo != 0)
             {
-                query = @"Update Compra set Codigo_Cliente= " + Compra.CodigoCliente.Codigo + ", Codigo_GiftCard= " + Compra.CodigoGiftCard.Codigo + ", Monto= " + Compra.Monto + ", Descuento= " + Compra.Descuento + ", Total = " + Compra.Total + "where Codigo = " + Compra.Codigo;
+                query[0] = @"Update Compra set Codigo_Cliente= " + Compra.CodigoCliente.Codigo + ", Codigo_GiftCard= " + Compra.CodigoGiftCard.Codigo + ", Monto= " + Compra.Monto + ", Descuento= " + Compra.Descuento + ", Total = " + Compra.Total + "where Codigo = " + Compra.Codigo;
             }
             else
             {
-                query = @"Insert into Compra (Codigo_Cliente, Codigo_GiftCard, Monto, Descuento, Total) values (" + Compra.CodigoCliente.Codigo + "," + Compra.CodigoGiftCard.Codigo + "," + Compra.Monto + "," + Compra.Descuento + "," + Compra.Total + ")";
+                query[0] = @"Insert into Compra (Codigo_Cliente, Codigo_GiftCard, Monto, Descuento, Total) values (" + Compra.CodigoCliente.Codigo + "," + Compra.CodigoGiftCard.Codigo + "," + Compra.Monto + "," + Compra.Descuento + "," + Compra.Total + ")"; 
             }
+            query[1] = @"Update [Gift Card] set Saldo = " + Compra.CodigoGiftCard.Saldo + ", Estado = '" + Compra.CodigoGiftCard.Estado + "' where Codigo= " + Compra.CodigoGiftCard.Codigo;
             return conexión.EscribirTransaction(query);
         }
 

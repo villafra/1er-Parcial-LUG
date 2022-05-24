@@ -265,6 +265,8 @@
             this.Name = "frmGiftCards";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Clientes";
+            this.Activated += new System.EventHandler(this.frmGiftCards_Activated);
+            this.Load += new System.EventHandler(this.frmGiftCards_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvGiftCards)).EndInit();
             this.grpGiftCards.ResumeLayout(false);
             this.grpGiftCards.PerformLayout();

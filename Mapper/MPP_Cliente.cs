@@ -16,9 +16,21 @@ namespace Mapper
         Conexión conexión;
         public bool Baja(BE_Cliente Cliente)
         {
-            string query = @"Delete from Cliente where Legajo= " + Cliente.Codigo;
-            conexión = new Conexión();
-            return conexión.EscribirTransaction(query);
+            if (Cliente.CodigoGiftCard == null)
+            {
+                string query = @"Delete from Cliente where Legajo= " + Cliente.Codigo;
+                conexión = new Conexión();
+                return conexión.EscribirTransaction(query);
+            }
+            else
+            {
+                string[] query = new string[2];
+                query[0] = @"Delete from Cliente where Legajo= " + Cliente.Codigo;
+                query[1] = @"Update[Gift Card] set Estado = '" + BE_Gift_Card.Status.Libre.ToString() + "' where Codigo = " + Cliente.CodigoGiftCard.Codigo;
+                conexión = new Conexión();
+                return conexión.EscribirTransaction(query);
+            }
+            
         }
 
         public bool Guardar(BE_Cliente Cliente)

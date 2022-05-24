@@ -53,6 +53,7 @@
     <Compile Include="Asociaciones.Designer.cs">
       <DependentUpon>Asociaciones.cs</DependentUpon>
     </Compile>
+    <Compile Include="Aspecto.cs" />
     <Compile Include="Gift Cards.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -64,6 +65,12 @@
     </Compile>
     <Compile Include="Clientes.Designer.cs">
       <DependentUpon>Clientes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Informes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Informes.Designer.cs">
+      <DependentUpon>Informes.cs</DependentUpon>
     </Compile>
     <Compile Include="Principal.cs">
       <SubType>Form</SubType>
@@ -81,6 +88,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Clientes.resx">
       <DependentUpon>Clientes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Informes.resx">
+      <DependentUpon>Informes.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Principal.resx">
       <DependentUpon>Principal.cs</DependentUpon>

@@ -21,13 +21,14 @@ namespace Presentación
             InitializeComponent();
             OBLL_Cliente = new BLL_Cliente();
             oBE_Cliente = new BE_Cliente();
-            ActualizarListado();
+            Aspecto.FormatearDGV(dgvClientes);
         }
 
         private void ActualizarListado()
         {
             dgvClientes.DataSource = null;
             dgvClientes.DataSource = OBLL_Cliente.Listar();
+            Aspecto.DGVClientes(dgvClientes);
         }
 
         private void btnNuevo_Click(object sender, EventArgs e)
@@ -46,7 +47,7 @@ namespace Presentación
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
-            Viejo();
+            oBE_Cliente = (BE_Cliente)dgvClientes.CurrentRow.DataBoundItem;
             OBLL_Cliente.Baja(oBE_Cliente);
             ActualizarListado();
         }
@@ -79,7 +80,6 @@ namespace Presentación
                 oBE_Cliente.Nombre = txtNombre.Text;
                 oBE_Cliente.Apellido = txtApellido.Text;
                 oBE_Cliente.FechadeNacimiento = dtpFechaNac.Value;
-                oBE_Cliente.CodigoGiftCard = null;
 
             }
             catch (Exception ex)
@@ -104,6 +104,16 @@ namespace Presentación
             {
                 throw ex;
             }
+        }
+
+        private void frmClientes_Load(object sender, EventArgs e)
+        {
+            ActualizarListado();
+        }
+
+        private void frmClientes_Activated(object sender, EventArgs e)
+        {
+            ActualizarListado();
         }
     }
 }

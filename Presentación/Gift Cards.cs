@@ -26,7 +26,8 @@ namespace Presentación
             oBLL_GiftCard_Internacional = new BLL_GiftCard_Internacional();
             oBE_GiftCard_Nacional = new BE_GiftCard_Nacional();
             oBE_GiftCard_Internacional = new BE_GiftCard_Internacional();
-            ActualizarListado();
+            Aspecto.FormatearDGV(dgvGiftCards);
+            
         }
 
         private void ActualizarListado()
@@ -204,6 +205,18 @@ namespace Presentación
         {
             if (comboAlcance.Text != "Internacional") { lblProvPais.Text = "Provincia"; }
             else { lblProvPais.Text = "Pais"; };
+        }
+
+        private void frmGiftCards_Activated(object sender, EventArgs e)
+        {
+            ActualizarListado();
+        }
+
+        private void frmGiftCards_Load(object sender, EventArgs e)
+        {
+            ActualizarListado();
+            Aspecto.DGVGiftCards(dgvGiftCards);
+
         }
     }
 }

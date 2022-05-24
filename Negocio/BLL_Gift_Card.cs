@@ -14,5 +14,6 @@ namespace Negocio
         public abstract void CalcularMontodeCompra(BE_Gift_Card oBE_GiftCard, BE_Compra oBE_Compra);
         public abstract void ModificarMontodeCompra(BE_Gift_Card oBE_GiftCard, BE_Compra oBE_Compramod, decimal TotalAnterior);
         public abstract void EliminarMontodeCompra(BE_Gift_Card oBE_GiftCard, BE_Compra oBE_Compra);
+        
     }
 }

@@ -39,7 +39,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.btnEliminarCompra = new System.Windows.Forms.Button();
-            this.txtMonto = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.lblSaldo = new System.Windows.Forms.Label();
@@ -48,9 +47,11 @@
             this.lblFechaVencimiento = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.btnBajaGiftCard = new System.Windows.Forms.Button();
+            this.numMonto = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.dgvGiftCards)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClientes)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCompras)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numMonto)).BeginInit();
             this.SuspendLayout();
             // 
             // dgvGiftCards
@@ -174,13 +175,6 @@
             this.btnEliminarCompra.UseVisualStyleBackColor = true;
             this.btnEliminarCompra.Click += new System.EventHandler(this.btnEliminarCompra_Click);
             // 
-            // txtMonto
-            // 
-            this.txtMonto.Location = new System.Drawing.Point(22, 409);
-            this.txtMonto.Name = "txtMonto";
-            this.txtMonto.Size = new System.Drawing.Size(143, 22);
-            this.txtMonto.TabIndex = 15;
-            // 
             // label4
             // 
             this.label4.AutoSize = true;
@@ -258,11 +252,31 @@
             this.btnBajaGiftCard.UseVisualStyleBackColor = true;
             this.btnBajaGiftCard.Click += new System.EventHandler(this.btnBajaGiftCard_Click);
             // 
+            // numMonto
+            // 
+            this.numMonto.DecimalPlaces = 2;
+            this.numMonto.Increment = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.numMonto.Location = new System.Drawing.Point(22, 409);
+            this.numMonto.Maximum = new decimal(new int[] {
+            1000000000,
+            0,
+            0,
+            0});
+            this.numMonto.Name = "numMonto";
+            this.numMonto.Size = new System.Drawing.Size(144, 22);
+            this.numMonto.TabIndex = 24;
+            this.numMonto.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
             // frmAsociaciones
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1298, 490);
+            this.Controls.Add(this.numMonto);
             this.Controls.Add(this.btnBajaGiftCard);
             this.Controls.Add(this.lblFechaVencimiento);
             this.Controls.Add(this.label8);
@@ -271,7 +285,6 @@
             this.Controls.Add(this.lblSaldo);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.txtMonto);
             this.Controls.Add(this.btnEliminarCompra);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -287,9 +300,12 @@
             this.Name = "frmAsociaciones";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Asociaciones";
+            this.Activated += new System.EventHandler(this.frmAsociaciones_Activated);
+            this.Load += new System.EventHandler(this.frmAsociaciones_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvGiftCards)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClientes)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCompras)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numMonto)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -308,7 +324,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btnEliminarCompra;
-        private System.Windows.Forms.TextBox txtMonto;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label lblSaldo;
@@ -317,5 +332,6 @@
         private System.Windows.Forms.Label lblFechaVencimiento;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Button btnBajaGiftCard;
+        private System.Windows.Forms.NumericUpDown numMonto;
     }
 }

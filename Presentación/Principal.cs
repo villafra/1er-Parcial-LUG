@@ -28,8 +28,7 @@ namespace Presentación
             else
             {
                 frm = new frmClientes();
-                frm.MdiParent = this;
-                frm.Show();
+                Aspecto.AbrirNuevoForm(this, frm);           
             }
         }
 
@@ -44,8 +43,7 @@ namespace Presentación
             else
             {
                 frm = new frmGiftCards();
-                frm.MdiParent = this;
-                frm.Show();
+                Aspecto.AbrirNuevoForm(this, frm);
             }
         }
 
@@ -60,8 +58,22 @@ namespace Presentación
             else
             {
                 frm = new frmAsociaciones();
-                frm.MdiParent = this;
-                frm.Show();
+                Aspecto.AbrirNuevoForm(this, frm);
+            }
+        }
+
+        private void informesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form frm = Application.OpenForms.Cast<Form>().FirstOrDefault(x => x is frmInformes);
+            if (frm != null)
+            {
+                frm.BringToFront();
+                return;
+            }
+            else
+            {
+                frm = new frmInformes();
+                Aspecto.AbrirNuevoForm(this, frm);
             }
         }
     }

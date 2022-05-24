@@ -32,7 +32,7 @@ namespace Mapper
                         GiftInt.FechaVencimiento = Convert.ToDateTime(row[2].ToString());
                         GiftInt.Saldo = Convert.ToDecimal(row[3].ToString());
                         GiftInt.Descuento = Convert.ToDecimal(row[4].ToString());
-                        GiftInt.Estado =  (BE_Gift_Card.Status)Enum.Parse(typeof(BE_Gift_Card.Status),row[5].ToString());
+                        GiftInt.Estado = (BE_Gift_Card.Status)Enum.Parse(typeof(BE_Gift_Card.Status), row[5].ToString());
                         GiftInt.Rubro = (BE_Gift_Card.Rubros)Enum.Parse(typeof(BE_Gift_Card.Rubros), row[6].ToString());
                         GiftInt.Pais = row[8].ToString();
                         if (GiftInt.Vencimiento() && GiftInt.Estado != BE_Gift_Card.Status.Vencida && GiftInt.Estado != BE_Gift_Card.Status.Baja)
@@ -102,7 +102,7 @@ namespace Mapper
                         {
                             ListadeGiftCards.Add(GiftInt);
                         }
-                        
+
                     }
                     else
                     {
@@ -125,7 +125,7 @@ namespace Mapper
                         {
                             ListadeGiftCards.Add(GiftNac);
                         }
-                        
+
                     }
                 }
             }
@@ -135,6 +135,7 @@ namespace Mapper
             }
             return ListadeGiftCards;
         }
+
 
 
     }

@@ -207,6 +207,8 @@
             this.Name = "frmClientes";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Clientes";
+            this.Activated += new System.EventHandler(this.frmClientes_Activated);
+            this.Load += new System.EventHandler(this.frmClientes_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvClientes)).EndInit();
             this.grpClientes.ResumeLayout(false);
             this.grpClientes.PerformLayout();

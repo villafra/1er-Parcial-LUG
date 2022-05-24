@@ -7,11 +7,11 @@ using Abstract;
 
 namespace Entidades
 {
-    public class BE_DescuentoCalculado : IEntidable
+    public class BE_DescuentoCalculado :IEntidable
     {
         public int Codigo { get; set; }
-        public int CodigoGiftCard { get; set; }
+        public BE_Gift_Card CodigoGiftCard { get; set; }
         public string TipoGiftCard { get; set; }
-        public decimal Descuento { get; set; }
+        public decimal SumaDescuentos { get; set; }
     }
 }

@@ -28,8 +28,9 @@ namespace Presentación
             oBLL_GiftCard_Internacional = new BLL_GiftCard_Internacional();
             oBLL_GiftCard_Nacional = new BLL_GiftCard_Nacional();
             oBLL_Compra = new BLL_Compra();
-            dgvGiftCards.DataSource = oBLL_GiftCard_Nacional.ListarLibres();
-            dgvClientes.DataSource = oBLL_Ciente.Listar();
+            Aspecto.FormatearDGV(dgvClientes);
+            Aspecto.FormatearDGV(dgvCompras);
+            Aspecto.FormatearDGV(dgvGiftCards);
           }
 
         private void dgvClientes_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -40,6 +41,10 @@ namespace Presentación
                 if (oBE_Cliente.CodigoGiftCard != null)
                 {
                     dgvCompras.DataSource = oBLL_Compra.Listar(oBE_Cliente);
+                    if (dgvCompras.Columns.Count > 0)
+                    {
+                        Aspecto.DGVComprasAsociaciones(dgvCompras);
+                    }
                     lblSaldo.Text = "$ " + oBE_Cliente.CodigoGiftCard.Saldo.ToString();
                     lblEstado.Text = oBE_Cliente.CodigoGiftCard.Estado.ToString();
                     lblFechaVencimiento.Text = oBE_Cliente.CodigoGiftCard.FechaVencimiento.ToString("dd/MM/yyy");
@@ -117,7 +122,7 @@ namespace Presentación
                     oBE_Compra.CodigoCliente = oBE_Cliente;
                     oBE_Compra.CodigoGiftCard = oBE_Cliente.CodigoGiftCard;
                     oBE_Compra.Descuento = oBE_Cliente.CodigoGiftCard.Descuento;
-                    oBE_Compra.Monto = Convert.ToDecimal(txtMonto.Text);
+                    oBE_Compra.Monto = numMonto.Value;
                     oBE_Compra.CalcularDescuento();
                     if (oBLL_Compra.ValidarSaldo(oBE_Cliente.CodigoGiftCard, oBE_Compra))
                     {
@@ -132,6 +137,8 @@ namespace Presentación
                             oBLL_Compra.Guardar(oBE_Compra);
                         }
                         dgvCompras.DataSource = oBLL_Compra.Listar(oBE_Cliente);
+                        Aspecto.DGVComprasAsociaciones(dgvCompras);
+                        numMonto.Value = 0;
                     }
                     else
                     {
@@ -156,7 +163,7 @@ namespace Presentación
         {
             oBE_Compra = (BE_Compra)dgvCompras.CurrentRow.DataBoundItem;
             decimal TotalAnterior = oBE_Compra.Total;
-            oBE_Compra.Monto = Convert.ToDecimal(txtMonto.Text);
+            oBE_Compra.Monto = numMonto.Value;
             oBE_Compra.CalcularDescuento();
             if (oBE_Compra.CodigoGiftCard is BE_GiftCard_Internacional)
             {
@@ -169,6 +176,7 @@ namespace Presentación
                 oBLL_Compra.Guardar(oBE_Compra);
             }
             dgvCompras.DataSource = oBLL_Compra.Listar(oBE_Cliente);
+            numMonto.Value = 0;
         }
 
         private void btnEliminarCompra_Click(object sender, EventArgs e)
@@ -193,6 +201,23 @@ namespace Presentación
             oBLL_Ciente.BajaGiftCard(oBE_Cliente);
             dgvClientes.DataSource = oBLL_Ciente.Listar();
             dgvGiftCards.DataSource = oBLL_GiftCard_Nacional.ListarLibres();
+        }
+
+        private void ActualizarListado()
+        {
+            dgvGiftCards.DataSource = oBLL_GiftCard_Nacional.ListarLibres();
+            dgvClientes.DataSource = oBLL_Ciente.Listar();
+        }
+        private void frmAsociaciones_Load(object sender, EventArgs e)
+        {
+            ActualizarListado();
+            Aspecto.DGVClientesAsociaciones(dgvClientes);
+            Aspecto.DGVGiftCardsAsociaciones(dgvGiftCards);
+        }
+
+        private void frmAsociaciones_Activated(object sender, EventArgs e)
+        {
+            ActualizarListado();
         }
     }
 }

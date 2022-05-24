@@ -20,7 +20,18 @@ namespace Entidades
         public abstract override string ToString();
         public abstract DateTime CalcularFechaVencimiento();
         public abstract bool Vencimiento();
-       public enum Status
+        public string DevolverTipo(BE_Gift_Card GiftCard)
+        {
+            if (GiftCard is BE_GiftCard_Nacional)
+            {
+                return "Nacional";
+            }
+            else
+            {
+                return "Internacional";
+            }
+        }
+        public enum Status
         {
             Libre,
             Activa,

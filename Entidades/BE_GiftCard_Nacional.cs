@@ -35,6 +35,7 @@ namespace Entidades
             return this.Codigo.ToString();
         }
 
+
         public override bool Vencimiento()
         {
             if (this.FechaVencimiento > DateTime.Today) { return false; }

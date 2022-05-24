@@ -12,6 +12,11 @@ namespace Negocio
     public class BLL_DescuentoCalculado : IGestionable<BE_DescuentoCalculado>
     {
         MPP_DescuentoCalculado oMPP_DescuentoCalculado;
+
+        public BLL_DescuentoCalculado()
+        {
+            oMPP_DescuentoCalculado = new MPP_DescuentoCalculado();
+        }
         public bool Baja(BE_DescuentoCalculado Descuento)
         {
             return oMPP_DescuentoCalculado.Baja(Descuento);
@@ -26,7 +31,18 @@ namespace Negocio
         {
             return oMPP_DescuentoCalculado.Listar();
         }
-
+        public List<BE_DescuentoCalculado> Listar(BE_Gift_Card GiftCard)
+        {
+            return oMPP_DescuentoCalculado.Listar(GiftCard);
+        }
+        public BE_DescuentoCalculado DevolverMAX()
+        {
+            return oMPP_DescuentoCalculado.DevolverMAX();
+        }
+        public BE_DescuentoCalculado DevolverMIN()
+        {
+            return oMPP_DescuentoCalculado.DevolverMIN();
+        }
         public BE_DescuentoCalculado ListarObjeto(BE_DescuentoCalculado Descuento)
         {
             throw new NotImplementedException();

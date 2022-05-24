@@ -52,7 +52,30 @@ namespace Data_Acces_Layer
             return Ds;
         }
 
-
+        public DataSet ListarStoreProcedure(string query)
+        {                
+            AbrirConexion();
+            DataSet Ds = new DataSet();
+            try
+            {
+                SqlCommand cmd = new SqlCommand(query, conexion);
+                cmd.CommandType = CommandType.StoredProcedure;
+                SqlDataAdapter DataAdapter = new SqlDataAdapter();
+                DataAdapter.SelectCommand = cmd;
+                DataAdapter.Fill(Ds);
+            }
+            catch (SqlException ex)
+            { throw ex; }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                CerrarConexion();
+            }
+            return Ds;
+        }
         public int Cantidades(string query)
         {
             int cantidad = 0;

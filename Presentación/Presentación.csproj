@@ -53,7 +53,6 @@
     <Compile Include="Asociaciones.Designer.cs">
       <DependentUpon>Asociaciones.cs</DependentUpon>
     </Compile>
-    <Compile Include="Aspecto.cs" />
     <Compile Include="Gift Cards.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -118,6 +117,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Conversiones\Conversiones.csproj">
+      <Project>{e5a431dd-53e7-4e18-bd3b-d7a039f1b64c}</Project>
+      <Name>Conversiones</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Entidades\Entidades %28BE%29.csproj">
       <Project>{8aa5cb74-7930-453d-bf04-f0f1d07cf4e5}</Project>
       <Name>Entidades %28BE%29</Name>

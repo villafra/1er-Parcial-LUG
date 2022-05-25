@@ -48,10 +48,12 @@
             this.label8 = new System.Windows.Forms.Label();
             this.btnBajaGiftCard = new System.Windows.Forms.Button();
             this.numMonto = new System.Windows.Forms.NumericUpDown();
+            this.grpCompras = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvGiftCards)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClientes)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCompras)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numMonto)).BeginInit();
+            this.grpCompras.SuspendLayout();
             this.SuspendLayout();
             // 
             // dgvGiftCards
@@ -59,15 +61,14 @@
             this.dgvGiftCards.AllowUserToAddRows = false;
             this.dgvGiftCards.AllowUserToDeleteRows = false;
             this.dgvGiftCards.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvGiftCards.Location = new System.Drawing.Point(815, 53);
+            this.dgvGiftCards.Location = new System.Drawing.Point(677, 53);
             this.dgvGiftCards.Name = "dgvGiftCards";
             this.dgvGiftCards.ReadOnly = true;
             this.dgvGiftCards.RowHeadersWidth = 51;
             this.dgvGiftCards.RowTemplate.Height = 24;
             this.dgvGiftCards.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvGiftCards.Size = new System.Drawing.Size(471, 318);
+            this.dgvGiftCards.Size = new System.Drawing.Size(400, 318);
             this.dgvGiftCards.TabIndex = 1;
-            this.dgvGiftCards.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvGiftCards_CellContentClick);
             // 
             // dgvClientes
             // 
@@ -80,7 +81,7 @@
             this.dgvClientes.RowHeadersWidth = 51;
             this.dgvClientes.RowTemplate.Height = 24;
             this.dgvClientes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvClientes.Size = new System.Drawing.Size(471, 318);
+            this.dgvClientes.Size = new System.Drawing.Size(333, 318);
             this.dgvClientes.TabIndex = 2;
             this.dgvClientes.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvClientes_CellContentClick);
             // 
@@ -141,7 +142,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(504, 23);
+            this.label1.Location = new System.Drawing.Point(407, 23);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(121, 16);
             this.label1.TabIndex = 11;
@@ -150,7 +151,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(952, 23);
+            this.label2.Location = new System.Drawing.Point(788, 23);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(171, 16);
             this.label2.TabIndex = 12;
@@ -178,7 +179,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(66, 390);
+            this.label4.Location = new System.Drawing.Point(54, 19);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(44, 16);
             this.label4.TabIndex = 16;
@@ -260,7 +261,7 @@
             0,
             0,
             0});
-            this.numMonto.Location = new System.Drawing.Point(22, 409);
+            this.numMonto.Location = new System.Drawing.Point(10, 39);
             this.numMonto.Maximum = new decimal(new int[] {
             1000000000,
             0,
@@ -271,12 +272,22 @@
             this.numMonto.TabIndex = 24;
             this.numMonto.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
+            // grpCompras
+            // 
+            this.grpCompras.Controls.Add(this.numMonto);
+            this.grpCompras.Controls.Add(this.label4);
+            this.grpCompras.Location = new System.Drawing.Point(12, 378);
+            this.grpCompras.Name = "grpCompras";
+            this.grpCompras.Size = new System.Drawing.Size(170, 67);
+            this.grpCompras.TabIndex = 25;
+            this.grpCompras.TabStop = false;
+            this.grpCompras.Text = "Compras";
+            // 
             // frmAsociaciones
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1298, 490);
-            this.Controls.Add(this.numMonto);
+            this.ClientSize = new System.Drawing.Size(1089, 490);
             this.Controls.Add(this.btnBajaGiftCard);
             this.Controls.Add(this.lblFechaVencimiento);
             this.Controls.Add(this.label8);
@@ -284,7 +295,6 @@
             this.Controls.Add(this.label6);
             this.Controls.Add(this.lblSaldo);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.label4);
             this.Controls.Add(this.btnEliminarCompra);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -296,6 +306,7 @@
             this.Controls.Add(this.btnAsociarGiftCard);
             this.Controls.Add(this.dgvClientes);
             this.Controls.Add(this.dgvGiftCards);
+            this.Controls.Add(this.grpCompras);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "frmAsociaciones";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
@@ -306,6 +317,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvClientes)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCompras)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numMonto)).EndInit();
+            this.grpCompras.ResumeLayout(false);
+            this.grpCompras.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -333,5 +346,6 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Button btnBajaGiftCard;
         private System.Windows.Forms.NumericUpDown numMonto;
+        private System.Windows.Forms.GroupBox grpCompras;
     }
 }

@@ -62,7 +62,7 @@
             this.dgvGiftCards.ReadOnly = true;
             this.dgvGiftCards.RowHeadersWidth = 51;
             this.dgvGiftCards.RowTemplate.Height = 24;
-            this.dgvGiftCards.Size = new System.Drawing.Size(888, 466);
+            this.dgvGiftCards.Size = new System.Drawing.Size(679, 466);
             this.dgvGiftCards.TabIndex = 0;
             this.dgvGiftCards.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvGiftCards_CellContentClick);
             // 
@@ -185,6 +185,7 @@
             this.txtPaisProv.Name = "txtPaisProv";
             this.txtPaisProv.Size = new System.Drawing.Size(162, 22);
             this.txtPaisProv.TabIndex = 8;
+            this.txtPaisProv.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPaisProv_KeyPress);
             // 
             // txtCodigo
             // 
@@ -255,7 +256,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1298, 490);
+            this.ClientSize = new System.Drawing.Size(1089, 490);
             this.Controls.Add(this.btnEliminar);
             this.Controls.Add(this.btnModificar);
             this.Controls.Add(this.btnNuevo);

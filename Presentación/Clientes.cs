@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Negocio;
 using Entidades;
+using Conversiones;
 
 namespace Presentación
 {
@@ -26,50 +27,95 @@ namespace Presentación
 
         private void ActualizarListado()
         {
-            dgvClientes.DataSource = null;
-            dgvClientes.DataSource = OBLL_Cliente.Listar();
+            Cálculos.RefreshGrilla(dgvClientes, OBLL_Cliente.Listar());
             Aspecto.DGVClientes(dgvClientes);
         }
 
         private void btnNuevo_Click(object sender, EventArgs e)
         {
-            Nuevo();
-            OBLL_Cliente.Guardar(oBE_Cliente);
-            ActualizarListado();
+            try
+            {
+                if (Cálculos.Txtvacío(txtNombre) && Cálculos.Txtvacío(txtApellido) && Cálculos.Txtvacío(txtDNI))
+                {
+                    Nuevo();
+                    OBLL_Cliente.Guardar(oBE_Cliente);
+                    ActualizarListado();
+                    Cálculos.BorrarCampos(grpClientes);
+                }
+                else
+                {
+                    Cálculos.MsgBox("Por favor, complete los campos obligatorios");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+
+            }
+
         }
 
         private void btnModificar_Click(object sender, EventArgs e)
         {
-            Viejo();
-            OBLL_Cliente.Guardar(oBE_Cliente);
-            ActualizarListado();
-        }
-
-        private void btnEliminar_Click(object sender, EventArgs e)
-        {
-            oBE_Cliente = (BE_Cliente)dgvClientes.CurrentRow.DataBoundItem;
-            OBLL_Cliente.Baja(oBE_Cliente);
-            ActualizarListado();
-        }
-
-        private void Nuevo()
-        {
             try
             {
-                oBE_Cliente.Codigo = 0;
-                oBE_Cliente.DNI = long.Parse(txtDNI.Text);
-                oBE_Cliente.Nombre = txtNombre.Text;
-                oBE_Cliente.Apellido = txtApellido.Text;
-                oBE_Cliente.FechadeNacimiento = dtpFechaNac.Value;
-                oBE_Cliente.CodigoGiftCard = null;
-
+                if (Cálculos.EstaSeguro(btnModificar))
+                {
+                    if (Cálculos.Txtvacío(txtNombre) && Cálculos.Txtvacío(txtApellido) && Cálculos.Txtvacío(txtDNI))
+                    {
+                        Viejo();
+                        OBLL_Cliente.Guardar(oBE_Cliente);
+                        ActualizarListado();
+                    }
+                    else
+                    {
+                        Cálculos.MsgBox("Por favor, complete los campos obligatorios");
+                    }
+                }
 
             }
             catch (Exception ex)
             {
+                MessageBox.Show(ex.Message);
 
-                throw ex;
             }
+            finally
+            {
+                Cálculos.BorrarCampos(grpClientes);
+            }
+        }
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (Cálculos.EstaSeguro(btnEliminar))
+                {
+                    oBE_Cliente = (BE_Cliente)dgvClientes.CurrentRow.DataBoundItem;
+                    OBLL_Cliente.Baja(oBE_Cliente);
+                    ActualizarListado();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+
+            }
+            finally
+            {
+                Cálculos.BorrarCampos(grpClientes);
+            }
+        }
+
+        private void Nuevo()
+        {
+            oBE_Cliente.Codigo = 0;
+            oBE_Cliente.DNI = long.Parse(txtDNI.Text);
+            oBE_Cliente.Nombre = txtNombre.Text;
+            oBE_Cliente.Apellido = txtApellido.Text;
+            oBE_Cliente.FechadeNacimiento = dtpFechaNac.Value;
+            oBE_Cliente.CodigoGiftCard = null;
         }
         private void Viejo()
         {
@@ -100,9 +146,9 @@ namespace Presentación
                 txtApellido.Text = oBE_Cliente.Apellido;
                 dtpFechaNac.Value = oBE_Cliente.FechadeNacimiento;
             }
-            catch (Exception ex)
+            catch
             {
-                throw ex;
+               
             }
         }
 
@@ -114,6 +160,11 @@ namespace Presentación
         private void frmClientes_Activated(object sender, EventArgs e)
         {
             ActualizarListado();
+        }
+
+        private void txtDNI_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            Cálculos.ValidarEnteros(e);
         }
     }
 }

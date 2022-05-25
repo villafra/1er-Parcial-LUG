@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Entidades;
 using Negocio;
+using Conversiones;
 
 
 namespace Presentación
@@ -26,30 +27,59 @@ namespace Presentación
             Descuento = new BLL_DescuentoCalculado();
             GifInt = new BLL_GiftCard_Internacional();
             Cliente = new BLL_Cliente();
-            dgvGiftCards.DataSource = GifInt.ListarTodo();
-            dgvClientes.DataSource = Cliente.Listar();
-            BuscarMaximo();
-            BuscarMinimo();
+            Aspecto.FormatearDGV(dgvClientes);
+            Aspecto.FormatearDGV(dgvGiftCards);
+            Aspecto.FormatearDGV(dgvDescuentos);
+            
         }
 
         private void dgvGiftCards_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             BE_Gift_Card gift_Card = (BE_Gift_Card)dgvGiftCards.CurrentRow.DataBoundItem;
-            dgvDescuentos.DataSource = Descuento.Listar(gift_Card);
+            try
+            {
+                dgvDescuentos.DataSource = Descuento.Listar(gift_Card);
+                Aspecto.DGVDescuentos(dgvDescuentos);
+            }
+            catch { }
         }
 
         private void BuscarMaximo()
         {
+            try
+            {
             BE_DescuentoCalculado oBE_Descuento = Descuento.DevolverMAX();
             lblCodigoGiftMax.Text = oBE_Descuento.CodigoGiftCard.ToString();
             lblMaximo.Text = @"$" + oBE_Descuento.SumaDescuentos.ToString();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("No se pudo cargar la Gift Card Con descuento Máximo.\n" + ex.Message);
+            }
         }
 
         private void BuscarMinimo()
         {
+            try
+            {
             BE_DescuentoCalculado oBE_Descuento = Descuento.DevolverMIN();
             lblCodigoGiftMin.Text = oBE_Descuento.CodigoGiftCard.ToString();
             lblMinimo.Text = @"$" + oBE_Descuento.SumaDescuentos.ToString();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("No se pudo cargar la Gift Card con el menor saldo" + ex.Message);
+            }
+        }
+
+        private void frmInformes_Load(object sender, EventArgs e)
+        {
+            dgvGiftCards.DataSource = GifInt.ListarTodo();
+            dgvClientes.DataSource = Cliente.Listar();
+            Aspecto.DGVGiftCards(dgvGiftCards);
+            Aspecto.DGVClientes(dgvClientes);
+            BuscarMaximo();
+            BuscarMinimo();
         }
     }
 }

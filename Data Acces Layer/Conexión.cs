@@ -39,7 +39,7 @@ namespace Data_Acces_Layer
             }
             catch (SqlException sql)
             {
-                throw sql;
+                throw new Exception(sql.Message);
             }
             catch (Exception ex)
             {
@@ -76,43 +76,6 @@ namespace Data_Acces_Layer
             }
             return Ds;
         }
-        public int Cantidades(string query)
-        {
-            int cantidad = 0;
-            try
-            {
-                AbrirConexion();
-                SqlCommand cmd = new SqlCommand();
-                cmd.CommandType = CommandType.Text;
-                cmd.CommandText = query;
-                cmd.Connection = conexion;
-                SqlDataReader reader = cmd.ExecuteReader();
-
-                while (reader.Read())
-                {
-                    if (!reader.IsDBNull(0))
-                    {
-                        cantidad = Convert.ToInt32(reader[0]);
-                    }
-
-                }
-            }
-            catch (SqlException sql)
-            {
-                throw sql;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-                CerrarConexion();
-            }
-            return cantidad;
-
-        }
-
         public bool LeerScalar(string query)
         {
             AbrirConexion();
@@ -147,30 +110,32 @@ namespace Data_Acces_Layer
             cmd.Connection = conexion;
             cmd.CommandText = query;
             sqlTransaction = conexion.BeginTransaction();
-
+            bool status = false;
             try
             {
                 cmd.Transaction = sqlTransaction;
                 cmd.ExecuteNonQuery();
                 sqlTransaction.Commit();
-                return true;
+                status = true;
             }
             catch (SqlException ex)
             {
                 sqlTransaction.Rollback();
-                return false;
+                status = false;
                 throw ex;
             }
             catch (Exception ex)
             {
                 sqlTransaction.Rollback();
-                return false;
+                status = false;
                 throw ex;
             }
             finally
             {
                 CerrarConexion();
+               
             }
+            return status;
         }
 
         public bool EscribirTransaction(string[] query)
@@ -181,7 +146,7 @@ namespace Data_Acces_Layer
             cmd.CommandType = CommandType.Text;
             cmd.Connection = conexion;
             sqlTransaction = conexion.BeginTransaction();
-
+            bool status = false;
             try
             {
                 for (int i = 0; i < query.Length; i++)
@@ -190,26 +155,26 @@ namespace Data_Acces_Layer
                     cmd.Transaction = sqlTransaction;
                     cmd.ExecuteNonQuery();
                 }
-
                 sqlTransaction.Commit();
-                return true;
+                status = true;
             }
             catch (SqlException ex)
             {
                 sqlTransaction.Rollback();
-                return false;
+                status = false;
                 throw ex;
             }
             catch (Exception ex)
             {
                 sqlTransaction.Rollback();
-                return false;
+                status = false;
                 throw ex;
             }
             finally
             {
                 CerrarConexion();
             }
+            return status;
         }
     }
 }

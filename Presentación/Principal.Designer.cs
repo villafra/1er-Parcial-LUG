@@ -31,10 +31,10 @@
             this.StripMenu = new System.Windows.Forms.MenuStrip();
             this.menuPrincipalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.asociacionesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.informesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.salirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.clientesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.giftCardsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.informesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.StripMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -47,7 +47,7 @@
             this.giftCardsToolStripMenuItem});
             this.StripMenu.Location = new System.Drawing.Point(0, 0);
             this.StripMenu.Name = "StripMenu";
-            this.StripMenu.Size = new System.Drawing.Size(1308, 28);
+            this.StripMenu.Size = new System.Drawing.Size(1035, 28);
             this.StripMenu.TabIndex = 1;
             this.StripMenu.Text = "menuStrip1";
             // 
@@ -64,15 +64,23 @@
             // asociacionesToolStripMenuItem
             // 
             this.asociacionesToolStripMenuItem.Name = "asociacionesToolStripMenuItem";
-            this.asociacionesToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.asociacionesToolStripMenuItem.Size = new System.Drawing.Size(178, 26);
             this.asociacionesToolStripMenuItem.Text = "Asociaciones";
             this.asociacionesToolStripMenuItem.Click += new System.EventHandler(this.asociacionesToolStripMenuItem_Click);
+            // 
+            // informesToolStripMenuItem
+            // 
+            this.informesToolStripMenuItem.Name = "informesToolStripMenuItem";
+            this.informesToolStripMenuItem.Size = new System.Drawing.Size(178, 26);
+            this.informesToolStripMenuItem.Text = "Informes";
+            this.informesToolStripMenuItem.Click += new System.EventHandler(this.informesToolStripMenuItem_Click);
             // 
             // salirToolStripMenuItem
             // 
             this.salirToolStripMenuItem.Name = "salirToolStripMenuItem";
-            this.salirToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.salirToolStripMenuItem.Size = new System.Drawing.Size(178, 26);
             this.salirToolStripMenuItem.Text = "Salir";
+            this.salirToolStripMenuItem.Click += new System.EventHandler(this.salirToolStripMenuItem_Click);
             // 
             // clientesToolStripMenuItem
             // 
@@ -88,18 +96,11 @@
             this.giftCardsToolStripMenuItem.Text = "Gift Cards";
             this.giftCardsToolStripMenuItem.Click += new System.EventHandler(this.giftCardsToolStripMenuItem_Click);
             // 
-            // informesToolStripMenuItem
-            // 
-            this.informesToolStripMenuItem.Name = "informesToolStripMenuItem";
-            this.informesToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
-            this.informesToolStripMenuItem.Text = "Informes";
-            this.informesToolStripMenuItem.Click += new System.EventHandler(this.informesToolStripMenuItem_Click);
-            // 
             // frmPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1308, 528);
+            this.ClientSize = new System.Drawing.Size(1035, 528);
             this.Controls.Add(this.StripMenu);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.IsMdiContainer = true;

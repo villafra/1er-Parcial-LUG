@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Conversiones;
 
 namespace Presentación
 {
@@ -75,6 +76,11 @@ namespace Presentación
                 frm = new frmInformes();
                 Aspecto.AbrirNuevoForm(this, frm);
             }
+        }
+
+        private void salirToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+           Application.Exit();
         }
     }
 }

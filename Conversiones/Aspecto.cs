@@ -6,9 +6,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Presentación
+namespace Conversiones
 {
-    internal class Aspecto
+    public class Aspecto
     {
         public static Action<Form, Form> AbrirNuevoForm = (formPadre, FormHijo) =>
         {
@@ -26,6 +26,7 @@ namespace Presentación
             dgv.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dgv.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             dgv.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            dgv.ColumnHeadersHeight = 30;
             dgv.AllowUserToResizeColumns = false;
             dgv.AllowUserToResizeRows = false;
             dgv.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
@@ -33,6 +34,7 @@ namespace Presentación
             dgv.RowHeadersVisible = false;
             dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             dgv.AlternatingRowsDefaultCellStyle.BackColor = Color.LightGray;
+            dgv.BackgroundColor = SystemColors.Control; 
             // dgv.AutoSizeRowsMode = DataGridViewAutoSizeRowMode.None;
 
         };
@@ -116,6 +118,20 @@ namespace Presentación
             dgv.Columns[5].HeaderText = "Total";
             dgv.Columns[5].DefaultCellStyle.Format = "c";
 
+            foreach (DataGridViewColumn columns in dgv.Columns)
+            {
+                columns.SortMode = DataGridViewColumnSortMode.NotSortable;
+                columns.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            }
+            dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+        }
+        public static void DGVDescuentos(DataGridView dgv)
+        {
+            dgv.Columns[0].Visible = false;
+            dgv.Columns[1].Visible = false;
+            dgv.Columns[2].HeaderText = "Tipo de Gift Card";
+            dgv.Columns[3].HeaderText = "Descuento Acumulado";
+            dgv.Columns[3].DefaultCellStyle.Format = "c";
             foreach (DataGridViewColumn columns in dgv.Columns)
             {
                 columns.SortMode = DataGridViewColumnSortMode.NotSortable;

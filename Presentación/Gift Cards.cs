@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using Negocio;
 using Entidades;
 using System.ComponentModel.DataAnnotations;
+using Conversiones;
 
 namespace Presentación
 {
@@ -32,62 +33,106 @@ namespace Presentación
 
         private void ActualizarListado()
         {
-            dgvGiftCards.DataSource = null;
-            dgvGiftCards.DataSource = oBLL_GiftCard_Nacional.ListarTodo();
-            ComboRubro.DataSource = null;
-            ComboRubro.DataSource = Enum.GetNames(typeof(BE_Gift_Card.Rubros));
-            comboAlcance.DataSource = Enum.GetNames(typeof(Tipo));
+            Cálculos.RefreshGrilla(dgvGiftCards, oBLL_GiftCard_Nacional.ListarTodo());
+            Cálculos.RefreshComboBox(ComboRubro, Enum.GetNames(typeof(BE_Gift_Card.Rubros)));
+            Cálculos.RefreshComboBox(comboAlcance, Enum.GetNames(typeof(Tipo)));
+            Aspecto.DGVGiftCards(dgvGiftCards);
         }
         private void btnNuevo_Click(object sender, EventArgs e)
         {
-            Nuevo();
-            ActualizarListado();
+            try
+            {
+                if (Cálculos.Txtvacío(txtPaisProv) && Cálculos.Numvacío(numSaldo))
+                {
+                    Nuevo();
+                    ActualizarListado();
+                    Cálculos.BorrarCampos(grpGiftCards);
+                }
+                else
+                {
+                    Cálculos.MsgBox("Por favor, complete los campos obligatorios");
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
         }
 
         private void btnModificar_Click(object sender, EventArgs e)
         {
-            if (lblProvPais.Text == "Nacional") 
-            { 
-                ViejoNac();
-                oBLL_GiftCard_Nacional.Guardar(oBE_GiftCard_Nacional);
+            try
+            {
+                if (Cálculos.EstaSeguro(btnModificar))
+                {
+                    if (lblProvPais.Text == "Nacional")
+                    {
+                        ViejoNac();
+                        oBLL_GiftCard_Nacional.Guardar(oBE_GiftCard_Nacional);
+                    }
+                    else
+                    {
+                        ViejoInt();
+                        oBLL_GiftCard_Internacional.Guardar(oBE_GiftCard_Internacional);
+                    }
+                    ActualizarListado();
+                }
+
             }
-            else 
-            { 
-                ViejoInt(); 
-                oBLL_GiftCard_Internacional.Guardar(oBE_GiftCard_Internacional);
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
-            ActualizarListado();
+            finally
+            {
+                Cálculos.BorrarCampos(grpGiftCards);
+            }
         }
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
-            if (lblProvPais.Text == "Nacional")
+            try
             {
-                ViejoNac();
-                if (oBLL_GiftCard_Nacional.GiftCardAsociada(oBE_GiftCard_Nacional))
+                if (Cálculos.EstaSeguro(btnEliminar))
                 {
-                    MessageBox.Show("Ya esta asociada");
+                    if (lblProvPais.Text == "Nacional")
+                    {
+                        ViejoNac();
+                        if (oBLL_GiftCard_Nacional.GiftCardAsociada(oBE_GiftCard_Nacional))
+                        {
+                            Cálculos.MsgBox("No se puede eliminar la Gift Card. Ya se encuentra asociada a un cliente");
+                        }
+                        else
+                        {
+                            oBLL_GiftCard_Nacional.Baja(oBE_GiftCard_Nacional);
+                        }
+                    }
+                    else
+                    {
+                        ViejoInt();
+                        if (oBLL_GiftCard_Internacional.GiftCardAsociada(oBE_GiftCard_Internacional))
+                        {
+                            Cálculos.MsgBox("No se puede elimnar la Gift Card. Ya se encuentra asociada a un cliente");
+                        }
+                        else
+                        {
+                            oBLL_GiftCard_Internacional.Baja(oBE_GiftCard_Internacional);
+                        }
+
+                    }
+                    ActualizarListado();
                 }
-                else
-                {
-                    oBLL_GiftCard_Nacional.Baja(oBE_GiftCard_Nacional);
-                }
-                
             }
-            else
+            catch (Exception ex)
             {
-                ViejoInt();
-                if (oBLL_GiftCard_Internacional.GiftCardAsociada(oBE_GiftCard_Internacional))
-                {
-                    MessageBox.Show("Ya esta asociada");
-                }
-                else
-                {
-                    oBLL_GiftCard_Internacional.Baja(oBE_GiftCard_Internacional);
-                }
-                
+                MessageBox.Show(ex.Message);
             }
-            ActualizarListado();
+            finally
+            {
+                Cálculos.BorrarCampos(grpGiftCards);
+            }
         }
 
         private void Nuevo()
@@ -215,8 +260,11 @@ namespace Presentación
         private void frmGiftCards_Load(object sender, EventArgs e)
         {
             ActualizarListado();
-            Aspecto.DGVGiftCards(dgvGiftCards);
+        }
 
+        private void txtPaisProv_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            Cálculos.ValidarLetras(e);
         }
     }
 }
